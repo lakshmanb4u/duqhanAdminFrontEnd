@@ -45,6 +45,20 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageTitle: 'View Product'
             }
         })
+        .state('details-product', {
+            url: "/details-product",
+            templateUrl: "views/details-product.html",
+            data: {
+                pageTitle: 'Details Product'
+            }
+        })
+         .state('Inventory', {
+            url: "/Inventory",
+            templateUrl: "views/inventory.html",
+            data: {
+                pageTitle: 'Inventory'
+            }
+        })
         
         // Interface
         .state('interface', {
