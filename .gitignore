@@ -1,0 +1,14 @@
+# temp files
+.DS_Store
+.tmp
+.sass-cache
+# build folder
+/dist/**
+
+# IDE
+# sublime
+*.sublime-project
+*.sublime-workspace
+
+node_modules/
+bower_components/
