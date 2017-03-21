@@ -90,16 +90,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Selma</td>
-                        <td>0877 118 6905</td>
-                        <td>P.O. Box 410, 7331 Nec, St.</td>
-                        <td>Glenrothes</td>
-                        <td>Korea, North</td>
-                        <td>Korea, North</td>
-                        <td>Korea, North</td>
-                        <td>Korea, North</td>
-                        <td>Korea, North</td>
+                    <tr ng-repeat="map in ctrl.productInventory">
+                        <td>{{map.sizeText}}</td>
+                        <td>{{map.colorText}}</td>
+                        <td>{{map.orginalPrice}}</td>
+                        <td>{{map.salesPrice}}</td>
+                        <td>{{map.count}}</td>
+                        <td>{{map.productLength}}</td>
+                        <td>{{map.productWidth}}</td>
+                        <td>{{map.productHeight}}</td>
+                        <td>{{map.productWeight}}</td>
                     </tr>
                     </tbody>
                 </table>

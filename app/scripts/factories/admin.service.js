@@ -27,5 +27,27 @@ function adminService($http, BASE_URL_CONSTANT) {
                 data: vendor
             });
         },
+        getProducts: function (start, limit) {
+            var bean = {};
+            bean.start = start;
+            bean.limit = limit;
+            return $http({
+                method: 'POST',
+                url: BASE_URL_CONSTANT + 'admin/get-product-lise',
+                headers: {'Content-Type': 'application/json'},
+                data: bean
+            });
+        },
+        getProductsInventory: function (id) {
+            var bean = {};
+            bean.productId = id;
+            
+            return $http({
+                method: 'POST',
+                url: BASE_URL_CONSTANT + 'admin/get-product-inventory',
+                headers: {'Content-Type': 'application/json'},
+                data: bean
+            });
+        }
   };
 }

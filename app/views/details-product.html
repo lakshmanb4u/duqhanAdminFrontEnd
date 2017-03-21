@@ -10,7 +10,6 @@
         <h2>
             DETAILS PRODUCT
         </h2>
-
     </div>
 </div>
 <div class="row">
@@ -56,32 +55,29 @@
                 </div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">Products Name</label>
-                    <div class="col-sm-10"><input type="text" placeholder="Products Name" class="form-control">
+                    <div class="col-sm-10"><input type="text" placeholder="Products Name" class="form-control" ng-model="ctrl.product.name">
                     </div>
                 </div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">Front Image</label>
-                    <div class="col-sm-10"><input type="text" placeholder="Front Image" class="form-control">
+                    <div class="col-sm-10"><input type="text" placeholder="Front Image" class="form-control" ng-model="ctrl.product.imgurl">
                     </div>
                 </div>
-                 <div class="form-group"><label class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10"><input type="text" placeholder="Front Image" class="form-control">
-                    </div>
-                </div>
+                 
                 <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10"><textarea class="form-control" rows="5" id="comment"></textarea>
+                    <div class="col-sm-10"><textarea class="form-control" rows="5" id="comment" ng-model="ctrl.product.description"></textarea>
                     </div>
                 </div>
             <div class="form-group"><label class="col-sm-2 control-label">Shipping Time (Day)</label>
-                <div class="col-sm-10"><input type="text" placeholder="Shipping Time (Day)" class="form-control">
+                <div class="col-sm-10"><input type="text" placeholder="Shipping Time (Day)" class="form-control" ng-model="ctrl.product.shippingTime">
                 </div>
             </div>
             <div class="form-group"><label class="col-sm-2 control-label">Shipping Cost</label>
-                <div class="col-sm-10"><input type="number" placeholder="Shipping Cost" class="form-control">
+                <div class="col-sm-10"><input type="number" placeholder="Shipping Cost" class="form-control" ng-model="ctrl.product.shippingRate">
                 </div>
             </div>
             <div class="form-group"><label class="col-sm-2 control-label">External Link</label>
-                <div class="col-sm-10"><input type="number" placeholder="External Link" class="form-control">
+                <div class="col-sm-10"><input type="text" placeholder="External Link" class="form-control" ng-model="ctrl.product.externalLink">
                 </div>
             </div>
                 <div class="hr-line-dashed"></div>

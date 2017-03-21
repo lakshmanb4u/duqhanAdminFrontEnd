@@ -49,8 +49,11 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
         .state('details-product', {
             url: "/details-product",
             templateUrl: "views/details-product.html",
-            controller: 'adminController',
+            controller: 'productdetailsController',
             controllerAs: 'ctrl',
+            params: {
+                product: null
+            },
             data: {
                 pageTitle: 'Details Product'
             }
@@ -59,8 +62,11 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
          .state('Inventory', {
             url: "/Inventory",
             templateUrl: "views/inventory.html",
-            controller: 'adminController',
+            controller: 'productinventoryController',
             controllerAs: 'ctrl',
+            params: {
+                id: null
+            },
             data: {
                 pageTitle: 'Inventory'
             }

@@ -13,7 +13,42 @@
         ctrl.selectedvendor= 'Select Vendor';
         ctrl.PselectedItem= 'Select Parent Category';
         ctrl.SizeGrupselectedItem= 'Select size';
-        ctrl.selectedColor = 'Select Color'
+        ctrl.selectedColor = 'Select Color';
+        ctrl.startIndex = 0;    // when get list of product
+        ctrl.isVisible = "true";
+        ctrl.isHide = "false";
+
+
+        // get products when load view product page
+        adminService.getProducts (ctrl.startIndex, 5)
+            .success(function (productBeans) {
+                ctrl.products = productBeans.products;
+                ctrl.startIndex = ctrl.startIndex + 5;
+                console.log('onload'+ctrl.products);
+            })
+            .error(function (error) {
+             console.log('Unable to load subject data');
+         });
+
+        // load more products
+         ctrl.getMoreProduct = function (){
+            console.log('ctrl.startIndex'+ctrl.startIndex);
+             adminService.getProducts (ctrl.startIndex, 5)
+            .success(function (productBeans) {
+                
+                if(productBeans.products.length < 1){
+                    
+                    ctrl.isHide = "true";
+                }else{
+                    ctrl.products = productBeans.products;
+                    ctrl.startIndex = ctrl.startIndex + 5;
+                }
+                console.log(ctrl.products);
+            })
+            .error(function (error) {
+             console.log('Unable to load subject data');
+         });
+        }; 
 
         ctrl.categoryitemselected = function (item) {
             ctrl.selectedItem = item.categoryName;
