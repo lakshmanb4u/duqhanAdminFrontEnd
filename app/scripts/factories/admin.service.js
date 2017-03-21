@@ -1,22 +1,31 @@
 angular
-        .module('homer')
-        .factory('adminService', adminService);
+.module('homer')
+.factory('adminService', adminService);
 
 function adminService($http, BASE_URL_CONSTANT) {
     return{
-        changePassword: function (id, newPassword) {
-            return $http.get(BASE_URL_CONSTANT + 'admin/resetpassword' + '?id=' + id + '&newPassword=' + newPassword);
+        getCategory: function () {
+            return $http.get(BASE_URL_CONSTANT + 'admin/get-category');
         },
-       
-        updaterules: function (rules) {
+        getVendor: function () {
+            return $http.get(BASE_URL_CONSTANT + 'admin/get-vendor');
+        },
+        getSize: function () {
+            return $http.get(BASE_URL_CONSTANT + 'admin/get-size');
+        },
+        getColor: function () {
+            return $http.get(BASE_URL_CONSTANT + 'admin/get-color');
+        },
+        getSizeGroup: function () {
+            return $http.get(BASE_URL_CONSTANT + 'admin/get-sizegroup');
+        },
+        addVendorSubmit: function (vendor) {
             return $http({
                 method: 'POST',
-                url: BASE_URL_CONSTANT + 'admin/UpdateRules',
+                url: BASE_URL_CONSTANT + 'admin/save-vendor',
                 headers: {'Content-Type': 'application/json'},
-                data: JSON.stringify(rules)
+                data: vendor
             });
         },
-    };
-
-
+  };
 }

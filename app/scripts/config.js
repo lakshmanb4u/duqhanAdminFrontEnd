@@ -1,9 +1,3 @@
-/**
- * HOMER - Responsive Admin Theme
- * version 1.8
- *
- */
-
 function configState($stateProvider, $urlRouterProvider, $compileProvider) {
 
     // Optimize load start with remove binding information inside the DOM element
@@ -31,32 +25,60 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageTitle: 'Dashboard'
             }
         })
+
         .state('addproduct', {
             url: "/addproduct",
             templateUrl: "views/add-product.html",
+            controller: 'adminController',
+            controllerAs: 'ctrl',
             data: {
                 pageTitle: 'Add Product'
             }
         })
+
         .state('viewproducts', {
             url: "/viewproducts",
             templateUrl: "views/viewproducts.html",
+            controller: 'adminController',
+            controllerAs: 'ctrl',
             data: {
                 pageTitle: 'View Product'
             }
         })
+
         .state('details-product', {
             url: "/details-product",
             templateUrl: "views/details-product.html",
+            controller: 'adminController',
+            controllerAs: 'ctrl',
             data: {
                 pageTitle: 'Details Product'
             }
         })
+        
          .state('Inventory', {
             url: "/Inventory",
             templateUrl: "views/inventory.html",
+            controller: 'adminController',
+            controllerAs: 'ctrl',
             data: {
                 pageTitle: 'Inventory'
+            }
+        })
+         .state('login', {
+            url: "/login",
+            templateUrl: "views/common_app/login.html",
+            data: {
+                pageTitle: 'Login page',
+                specialClass: 'blank'
+            }
+        })
+        .state('register', {
+            url: "/register",
+            templateUrl: "views/common_app/register.html",
+            data: {
+                pageTitle: 'Register page',
+                specialClass: 'blank'
             }
         })
         
@@ -176,22 +198,6 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
             templateUrl: "views/common/content_empty.html",
             data: {
                 pageTitle: 'Common'
-            }
-        })
-        .state('common.login', {
-            url: "/login",
-            templateUrl: "views/common_app/login.html",
-            data: {
-                pageTitle: 'Login page',
-                specialClass: 'blank'
-            }
-        })
-        .state('common.register', {
-            url: "/register",
-            templateUrl: "views/common_app/register.html",
-            data: {
-                pageTitle: 'Register page',
-                specialClass: 'blank'
             }
         })
         .state('common.error_one', {
