@@ -4,92 +4,91 @@
 <aside id="menu" ng-include="'views/common/navigation.html'"></aside>
 <!-- Main Wrapper -->
 <div id="wrapper">
-<div class="content" animate-panel effect="zoomIn">
-<div class="row">
-    <div class="col-lg-12 text-center m-t-md">
-        <h2>
-            DETAILS PRODUCT
-        </h2>
-    </div>
-</div>
-<div class="row">
-<div class="col-lg-12">
-    <div class="hpanel">
-        <div class="panel-body">
-            <form method="get" class="form-horizontal">
+    <div class="content" animate-panel effect="zoomIn">
+        <div class="row">
+            <div class="col-lg-12 text-center m-t-md">
+                <h2>
+                    DETAILS PRODUCT
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <form method="get" class="form-horizontal">
 
-                <div class="hr-line-dashed"></div>
-                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="dropdown">
-                                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown
-                                  <span class="caret"></span></button>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="#">HTML</a></li>
-                                    <li><a href="#">CSS</a></li>
-                                    <li><a href="#">JavaScript</a></li>
-                                  </ul>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="dropdown">
+                                              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getCategory()">
+                                                 {{ctrl.selectedItem}}
+                                                 <span class="caret"></span>
+                                             </button>
+                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li ng-repeat="a in ctrl.category"><a ng-click="ctrl.categoryitemselected(a)">{{a.categoryName}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                     <div class="text-center">
+                                         <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#categoryModal">Add Category</button>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <div class="dropdown">
+                                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getVendor()">
+                                          {{ctrl.selectedvendor}}
+                                          <span class="caret"></span></button>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li ng-repeat="vendr in ctrl.vendor"><a ng-click="ctrl.Vendoritemselected(vendr)">{{vendr.contactName}}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
+                                <div class="col-md-3"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vendorModal">Add Vendor</button></div>
                             </div>
-                            <div class="col-md-3">
-                             <div class="text-center">
-                             <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#categoryModal">Add Category</button>
-                            </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="dropdown">
-                                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown
-                                  <span class="caret"></span></button>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="#">HTML</a></li>
-                                    <li><a href="#">CSS</a></li>
-                                    <li><a href="#">JavaScript</a></li>
-                                  </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-3"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vendorModal">Add Vendor</button></div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group"><label class="col-sm-2 control-label">Products Name</label>
-                    <div class="col-sm-10"><input type="text" placeholder="Products Name" class="form-control" ng-model="ctrl.product.name">
+                    <div class="form-group"><label class="col-sm-2 control-label">Products Name</label>
+                        <div class="col-sm-10"><input type="text" placeholder="Products Name" class="form-control" ng-model="ctrl.product.name">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group"><label class="col-sm-2 control-label">Front Image</label>
-                    <div class="col-sm-10"><input type="text" placeholder="Front Image" class="form-control" ng-model="ctrl.product.imgurl">
+                    <div class="form-group"><label class="col-sm-2 control-label">Front Image</label>
+                        <div class="col-sm-10"><input type="text" placeholder="Front Image" class="form-control" ng-model="ctrl.product.imgurl">
+                        </div>
                     </div>
-                </div>
-                 
-                <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10"><textarea class="form-control" rows="5" id="comment" ng-model="ctrl.product.description"></textarea>
+
+                    <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10"><textarea class="form-control" rows="5" id="comment" ng-model="ctrl.product.description"></textarea>
+                        </div>
                     </div>
-                </div>
-            <div class="form-group"><label class="col-sm-2 control-label">Shipping Time (Day)</label>
-                <div class="col-sm-10"><input type="text" placeholder="Shipping Time (Day)" class="form-control" ng-model="ctrl.product.shippingTime">
-                </div>
-            </div>
-            <div class="form-group"><label class="col-sm-2 control-label">Shipping Cost</label>
-                <div class="col-sm-10"><input type="number" placeholder="Shipping Cost" class="form-control" ng-model="ctrl.product.shippingRate">
-                </div>
-            </div>
-            <div class="form-group"><label class="col-sm-2 control-label">External Link</label>
-                <div class="col-sm-10"><input type="text" placeholder="External Link" class="form-control" ng-model="ctrl.product.externalLink">
-                </div>
-            </div>
-                <div class="hr-line-dashed"></div>
-                <div class="form-group">
-                    <div class="col-sm-12 text-right">
-                        <button class="btn btn-primary" type="submit">Save changes</button>
+                    <div class="form-group"><label class="col-sm-2 control-label">Shipping Time (Day)</label>
+                        <div class="col-sm-10"><input type="text" placeholder="Shipping Time (Day)" class="form-control" ng-model="ctrl.product.shippingTime">
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group"><label class="col-sm-2 control-label">Shipping Cost</label>
+                        <div class="col-sm-10"><input type="number" placeholder="Shipping Cost" class="form-control" ng-model="ctrl.product.shippingRate">
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="col-sm-2 control-label">External Link</label>
+                        <div class="col-sm-10"><input type="text" placeholder="External Link" class="form-control" ng-model="ctrl.product.externalLink">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12 text-right">
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 <!-- Right sidebar -->
@@ -100,96 +99,112 @@
 
 <!-- Modal -->
 <!--Add Category modal-->
-<div class="modal fade" id="categoryModal" role="dialog">
-    <div class="modal-dialog">
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <button type="button" class="close" 
+            data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title text-center" id="myModalLabel">
+            Add Category
+        </h4>
+    </div>
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Category</h4>
-            </div>
-            <div class="modal-body">
-                <!--<form class="form-horizontal" id="CategoryId" name="CategoryBean" action="/web/save-category">-->
-                <div class="form-group has-success has-feedback">
-                    <label class="col-sm-2 control-label" for="inputSuccess">Category Name</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" name="Category" id="category-name" type="text" placeholder="Category Name" required="">
-                    </div>
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <label class="col-sm-2 control-label" for="inputSuccess">Category Parent</label>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle get-category-parent" style="margin-left: 1%;" type="button" data-toggle="dropdown">Category Parent
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu get-category-parent-list" style="margin-left: 18%;">
-
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-9"></div>
-                    <div class="col-sm-3">
-                        <span class="pull-right">
-                            <button type="button" id="addCategorySubmit" class="btn btn-default">
-                                <span class="glyphicon glyphicon-save"></span>Save</button>
-                        </span>
-                    </div>
-                </div>
-                <!--</form>-->
-            </div>
+    <!-- Modal Body -->
+    <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Category Name</label>
+            <input type="text" class="form-control"
+            id="exampleInputEmail1" placeholder="Category Name" required=""/>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Category Parent</label>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.PgetCategory()">
+                 {{ctrl.PselectedItem}}
+                 <span class="caret"></span>
+             </button>
+             <ul class="dropdown-menu" aria-labelledby="dropdownMenu5">
+                <li ng-repeat="a in ctrl.Pcategory"><a ng-click="ctrl.Pcategoryitemselected(a)">{{a.categoryName}}</a></li>
+            </ul>
         </div>
     </div>
+</form>
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary">
+        Save changes
+    </button>
+</div>
+</div>
+</div>
 </div>
 <!--Add Category modal-->
 
 <!--Add vendor modal-->
 <div class="modal fade" id="vendorModal" role="dialog">
-    <div class="modal-dialog">
+  <div class="modal-dialog">
+    <form class="form-horizontal" name="ctrl.vendor" ng-submit="ctrl.addVendorSubmit()">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Vendor</h4>
-            </div>
-            <div class="modal-body">
-                <!--<form method="POST" class="form-horizontal" id="AddVendor" name="ColorDto" action="/web/save-vendor">-->
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="VendorName" id="VendorID" type="text" placeholder="Vendor Name" required="">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="Street" id="StreetID" type="text" placeholder="Street" required="">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="Street2" id="Street2ID" type="text" placeholder="Street (Optional)">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="City" id="CityID" type="text" placeholder="City" required="">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="State" id="StateID" type="text" placeholder="State" required="">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="Country" id="CountryID" type="text" placeholder="Country" required="">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="Zip" id="ZipID" type="text" placeholder="Zip" required="">
-                </div>
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="Phone" id="PhoneID" type="text" placeholder="Phone" required="">
-                </div>
-                <div class="row">
-                    <div class="col-sm-9"></div>
-                    <div class="col-sm-3">
-                        <span class="pull-right">
-                            <button type="button" id="addVendorSubmit" class="btn btn-success btn-lg active">
-                                <span class="glyphicon glyphicon-save"></span>Save</button>
-                        </span>
-                    </div>
-                </div>
-                <!--</form>-->
-            </div>
+               <button type="button" class="close" 
+               data-dismiss="modal">
+               <span aria-hidden="true">&times;</span>
+               <span class="sr-only">Close</span>
+           </button>
+           <h4 class="modal-title text-center">Add Vendor</h4>
+       </div>
+       <div class="modal-body">
+        <div class="form-group has-success has-feedback">
+            <input class="form-control" name="contactName " type="text" placeholder="Vendor Name" required="" ng-model="ctrl.vendor.contactName">
+        </div>
+
+        <div class="form-group has-success has-feedback">
+            <input class="form-control" name="streetOne" type="text" placeholder="Street" required="" ng-model="ctrl.vendor.streetOne">
+        </div>
+
+        <div class="form-group has-success has-feedback">
+            <input class="form-control" name="streetTwo" type="text" placeholder="Street (Optional)" ng-model="ctrl.vendor.streetTwo">
+        </div>
+
+        <div class="form-group has-success has-feedback">
+            <input class="form-control" name="city" type="text" placeholder="City" required="" ng-model="ctrl.vendor.city">
+        </div>
+
+        <div class="form-group has-success has-feedback">
+           <input class="form-control" name="state" type="text" placeholder="State" required="" ng-model="ctrl.vendor.state">
+       </div>
+
+       <div class="form-group has-success has-feedback">
+        <input class="form-control" name="country" type="text" placeholder="Country" required="" ng-model="ctrl.vendor.country">
+    </div>
+
+    <div class="form-group has-success has-feedback">
+        <input class="form-control" name="zipCode" type="text" placeholder="Zip" required="" ng-model="ctrl.vendor.zipCode">
+    </div>
+
+    <div class="form-group has-success has-feedback">
+        <input class="form-control" name="phone" type="text" placeholder="Phone" required="" ng-model="ctrl.vendor.phone">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3">
+            <button type="submit" id="addVendorSubmit" class="btn btn-success btn-lg active">Save</button>
         </div>
     </div>
+</div>
+</div>
+</form>
+</div>
 </div>
 <!--Add vendor modal-->
 
@@ -251,83 +266,83 @@
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle get-sizegroup" style="margin-left: 1%;" type="button" data-toggle="dropdown">Size Group
                                     <span class="caret"></span></button>
-                                <ul class="dropdown-menu get-sizegroup-list" style="margin-left: 18%;">
-                                </ul>
+                                    <ul class="dropdown-menu get-sizegroup-list" style="margin-left: 18%;">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <!--<label for="text">size:</label>-->
+                                <input class="form-control" name="size" id="size-name" type="text" placeholder="Size" required="">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" id="addSizeSubmit" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+                        </div>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--Add Size modal-->
+
+    <!--Add specification modal-->
+    <div class="modal fade" id="specificationModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Specification</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="text">Specification</label>
+                                <input class="form-control" name="Specification" id="addSpecificationId" type="text" placeholder="Specification" required="">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="text">Value</label>
+                                <input class="form-control" name="Value" id="addSpecificationValue" type="text" placeholder="Value" required="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <!--<label for="text">size:</label>-->
-                            <input class="form-control" name="size" id="size-name" type="text" placeholder="Size" required="">
-                        </div>
+                    <div class="modal-footer">
+                        <button id="addSpecificationSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
                     </div>
-                    <div class="col-sm-2">
-                        <button type="button" id="addSizeSubmit" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
-                    </div>
-                </div>
-                <!--</form>-->
-            </div>
-        </div>
-
-    </div>
-</div>
-<!--Add Size modal-->
-
-<!--Add specification modal-->
-<div class="modal fade" id="specificationModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Specification</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="text">Specification</label>
-                            <input class="form-control" name="Specification" id="addSpecificationId" type="text" placeholder="Specification" required="">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="text">Value</label>
-                            <input class="form-control" name="Value" id="addSpecificationValue" type="text" placeholder="Value" required="">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="addSpecificationSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Add specification modal-->
+    <!--Add specification modal-->
 
-<!--Add specification value modal-->
-<div class="modal fade" id="specificvalueModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Value</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="text">Color Name:</label>
-                    <input class="form-control" name="addvalue" id="value-text" type="text" placeholder="Value" required="">
+    <!--Add specification value modal-->
+    <div class="modal fade" id="specificvalueModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Value</h4>
                 </div>
-                <div>
-                    <button id="addValueSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="text">Color Name:</label>
+                        <input class="form-control" name="addvalue" id="value-text" type="text" placeholder="Value" required="">
+                    </div>
+                    <div>
+                        <button id="addValueSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--Add specification value modal-->
+    <!--Add specification value modal-->
 
 

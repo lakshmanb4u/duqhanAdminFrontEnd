@@ -21,19 +21,19 @@
 
         // get products when load view product page
         adminService.getProducts (ctrl.startIndex, 5)
-            .success(function (productBeans) {
-                ctrl.products = productBeans.products;
-                ctrl.startIndex = ctrl.startIndex + 5;
-                console.log('onload'+ctrl.products);
-            })
-            .error(function (error) {
-             console.log('Unable to load subject data');
-         });
+        .success(function (productBeans) {
+            ctrl.products = productBeans.products;
+            ctrl.startIndex = ctrl.startIndex + 5;
+            console.log('onload'+ctrl.products);
+        })
+        .error(function (error) {
+         console.log('Unable to load subject data');
+     });
 
         // load more products
-         ctrl.getMoreProduct = function (){
+        ctrl.getMoreProduct = function (){
             console.log('ctrl.startIndex'+ctrl.startIndex);
-             adminService.getProducts (ctrl.startIndex, 5)
+            adminService.getProducts (ctrl.startIndex, 5)
             .success(function (productBeans) {
                 
                 if(productBeans.products.length < 1){
@@ -167,7 +167,7 @@
             .success(function (response) {
                 console.log(response);
             })
-             .error(function (error) {
+            .error(function (error) {
              console.log('!Error');
          });
         };

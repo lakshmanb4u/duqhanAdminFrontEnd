@@ -14,23 +14,23 @@
           <div class="panel-body">
            <div class="col-md-3">
             <img src="{{product.imgurl}}" alt="product" height="50%" width="50%" class="img-responsive img-thumbnail">
-           </div>
-           <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
             <h3>{{product.name}}</h3><br>
             <p>{{product.description}}</p>
-           </div>
-           <div class="col-md-2">
+          </div>
+          <div class="col-md-2">
             <p>Available : {{product.available}}</p>
-           </div>
-           <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
             <button type="button" class="btn w-xs btn-primary2" ui-sref="details-product({product: product})">Details</button>
             <button type="button" class="btn w-xs btn-info" ui-sref="Inventory({id: product.productId})">Inventory</button>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
- <button type="button" class="btn w-xs btn-info"  ng-hide={{ctrl.isHide}} ng-click="ctrl.getMoreProduct()">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn w-xs btn-info"  ng-hide={{ctrl.isHide}} ng-click="ctrl.getMoreProduct()">Next</button>
 </div>
 <!-- Right sidebar -->
 <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>

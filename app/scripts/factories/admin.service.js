@@ -41,7 +41,6 @@ function adminService($http, BASE_URL_CONSTANT) {
         getProductsInventory: function (id) {
             var bean = {};
             bean.productId = id;
-            
             return $http({
                 method: 'POST',
                 url: BASE_URL_CONSTANT + 'admin/get-product-inventory',
@@ -49,5 +48,5 @@ function adminService($http, BASE_URL_CONSTANT) {
                 data: bean
             });
         }
-  };
+    };
 }

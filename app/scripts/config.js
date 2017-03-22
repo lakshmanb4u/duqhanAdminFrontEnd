@@ -59,7 +59,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
             }
         })
         
-         .state('Inventory', {
+        .state('Inventory', {
             url: "/Inventory",
             templateUrl: "views/inventory.html",
             controller: 'productinventoryController',
@@ -71,7 +71,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageTitle: 'Inventory'
             }
         })
-         .state('login', {
+        .state('login', {
             url: "/login",
             templateUrl: "views/common_app/login.html",
             data: {
@@ -330,9 +330,9 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
                 pageDesc: 'Build a form with validation functionality.'
             }
         })
-}
+    }
 
-angular
+    angular
     .module('homer')
     .config(configState)
     .run(function($rootScope, $state, editableOptions) {
