@@ -29,7 +29,7 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
         .state('addproduct', {
             url: "/addproduct",
             templateUrl: "views/add-product.html",
-            controller: 'adminController',
+            controller: 'productaddController',
             controllerAs: 'ctrl',
             data: {
                 pageTitle: 'Add Product'
@@ -331,6 +331,12 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
             }
         })
     }
+
+    // cloudinaryProvider.config({
+    // api_key: '211572778157664', // default
+    // cloud_name: 'duqhan', // required
+    // api_secret: 'BjqvouftX41P4NHFbAEPFaBWFog' // optional
+    // });
 
     angular
     .module('homer')

@@ -71,6 +71,7 @@
     "clockpicker": "~0.0.7",
     "eonasdan-bootstrap-datetimepicker": "~4.15.35",
     "c3-angular": "~1.0.1",
-    "angular-ladda": "~0.3.1"
+    "angular-ladda": "~0.3.1",
+    "angular-cloudinary": "^1.2.4"
   }
 }

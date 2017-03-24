@@ -1,325 +1,400 @@
-    <!-- Header -->
-    <div id="header" ng-include="'views/common/header.html'"></div>
-    <!-- Navigation -->
-    <aside id="menu" ng-include="'views/common/navigation.html'"></aside>
-    <!-- Main Wrapper -->
-    <div id="wrapper">
-        <div class="content" animate-panel effect="zoomIn">
-            <div class="row">
-                <div class="col-lg-12 text-center m-t-md">
-                    <h2>
-                        ADD PRODUCT
-                    </h2>
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="content" animate-panel effect="zoomIn">
+        <div class="row">
+            <div class="col-lg-12 text-center m-t-md">
+                <h2>
+                    ADD PRODUCT
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <form class="form-horizontal" name="addproduct" ng-submit="ctrl.saveproduct()">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Upload Image</label>
+                                <div class="col-sm-10">
+                                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                        <span class="btn btn-default btn-file" style="margin-left: 0;">
+                                            <input type="file" name="frontImage" id="fileId" required="" ng-model="ctrl.frontimage">
+                                        </span>
+                                        <button type="button" class="btn btn-primary" ng-click="ctrl.uploadImage()">Upload</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getCategory()">
+                                               {{ctrl.selectedItem}}
+                                               <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li ng-repeat="a in ctrl.category"><a ng-click="ctrl.categoryitemselected(a)">{{a.categoryName}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#categoryModal">Add Category</button>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-md-3">
+                                            <div class="dropdown">
+                                              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getVendor()">
+                                                  {{ctrl.selectedvendor}}
+                                                  <span class="caret"></span></button>
+                                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <li ng-repeat="vendr in ctrl.vendor"><a ng-click="ctrl.Vendoritemselected(vendr)">{{vendr.contactName}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vendorModal">Add Vendor</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">Products Name</label>
+                                <div class="col-sm-10"><input type="text" name="name" placeholder="Products Name" class="form-control" ng-model="ctrl.productBean.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">Front Image</label>
+                                <div class="col-sm-10"><input type="text" name="imgurl" placeholder="Front Image" class="form-control" ng-model="ctrl.productBean.imgurl" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-repeat="img in ctrl.productBean.imageDtos"><label class="col-sm-2 control-label">Image</label>
+                                <div class="col-sm-10"><input type="text" name="imgurl" placeholder="Image" class="form-control" value="{{img.imgUrl}}" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10"><textarea class="form-control" rows="5" id="comment" name="description" placeholder="Description" ng-model="ctrl.productBean.description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">Shipping Time (Day)</label>
+                                <div class="col-sm-10"><input type="text" name="shippingTime" placeholder="Shipping Time (Day)" class="form-control" ng-model="ctrl.productBean.shippingTime">
+                                </div>
+                            </div>
+                            <div class="form-group"><label class="col-sm-2 control-label">Shipping Cost</label>
+                                <div class="col-sm-10"><input type="number" name="shippingRate" placeholder="Shipping Cost" class="form-control" ng-model="ctrl.productBean.shippingRate">
+                                </div>
+                            </div>
+                            <div class="form-group"><label class="col-sm-2 control-label">External Link</label>
+                                <div class="col-sm-10"><textarea name="externalLink" placeholder="External Link" class="form-control" ng-model="ctrl.productBean.externalLink"></textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed">Specification</div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getSpecifications()">
+                                               {{ctrl.selectedspecifications}} 
+                                               <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li ng-repeat="(key, value) in ctrl.specifications"><a ng-click="ctrl.specificationsSelect(key, value)">{{value}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#specificationModal">+</button>
+                                            </div>
+                                        </div>
+
+                                         <div class="col-md-3">
+                                            <div class="dropdown">
+                                              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                  {{ctrl.selectedspecificationValue}}
+                                                  <span class="caret"></span></button>
+                                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <li ng-repeat="value in ctrl.specificationValue"><a ng-click="ctrl.specificationValueSelected(value)">{{value}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#specificvalueModal">+</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary" type="button" ng-click="ctrl.addSpecifications()">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"><label class="col-sm-2 control-label">Specifications</label>
+                                <div class="col-sm-10"><textarea name="Specifications" placeholder="Specifications" class="form-control" ng-model="ctrl.productBean.specifications" rows="5" disabled="disabled"></textarea>
+                                </div>
+                            </div>
+                
+                            <div class="table-responsive">
+                                <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Size</th>
+                                            <th>Color</th>
+                                            <th>Original Price</th>
+                                            <th>Sale Price</th>
+                                            <th>Quantity</th>
+                                            <th>Product Length</th>
+                                            <th>Product Width</th>
+                                            <th>Product Height</th>
+                                            <th>Product Weight</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="map in ctrl.productBean.sizeColorMaps">
+                                            <td>
+                                                <input type="text" class="form-control" ng-model="map.sizeText" disabled="disabled">
+                                                <!-- <div class="btn-group" uib-dropdown>
+                                                    <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getSize()">
+                                                        {{map.sizeText}}
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
+                                                        <li ng-repeat="Siz in ctrl.size">
+                                                            <a ng-click="ctrl.thisSizeSelected(Siz, map)">{{Siz.sizeText}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div> -->
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" ng-model="map.colorText" disabled="disabled">
+                                                <!-- <div class="btn-group" uib-dropdown>
+                                                    <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getColor()">
+                                                        {{map.colorText}}
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
+                                                        <li ng-repeat="color in ctrl.color">
+                                                            <a ng-click="ctrl.thisColorSelected(color, map)">{{color.colorText}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div> -->
+                                                
+                                            </td>
+                                            <td>
+                                                <input class="form-control" id="priceid" type="number" name="priceid" pattern="[0-9]+([\.,][0-9]+)?" step="1" ng-model="map.orginalPrice" min="0" disabled="disabled">
+                                            </td>
+                                            <td>
+                                                <input class="form-control" id="discountid" value="0" name="discountedPrice" type="number" step="1" pattern="[0-9]+([\.,][0-9]+)?" ng-model="map.salesPrice" min="0" disabled="disabled">
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" ng-model="map.count" disabled="disabled">
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" ng-model="map.productLength" disabled="disabled">
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" ng-model="map.productWidth" disabled="disabled">
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" ng-model="map.productHeight" disabled="disabled">
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control" ng-model="map.productWeight" disabled="disabled">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="btn-group" uib-dropdown>
+                                                    <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getSize()" ng-disabled="ctrl.sizeDisabled">
+                                                        {{ctrl.selectedSize}}
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
+                                                        <li ng-repeat="Siz in ctrl.size"><a ng-click="ctrl.SizeSelected(Siz)">{{Siz.sizeText}}</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#sizeModal">+</button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" uib-dropdown>
+                                                    <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getColor()" ng-disabled="ctrl.colorDisabled">
+                                                        {{ctrl.selectedColor}} 
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
+                                                        <li ng-repeat="colr in ctrl.color"><a ng-click="ctrl.ColorSelected(colr)">{{colr.colorText}}</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#colorModal">+</button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Original Price" class="form-control" ng-model="ctrl.newInventory.orginalPrice">
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Sale Price" class="form-control" ng-model="ctrl.newInventory.salesPrice">
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Quantity" class="form-control" ng-model="ctrl.newInventory.count">
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Product Length" class="form-control" ng-model="ctrl.newInventory.productLength">
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Product Width" class="form-control" ng-model="ctrl.newInventory.productWidth">
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Product Height" class="form-control" ng-model="ctrl.newInventory.productHeight">
+                                            </td>
+                                            <td>
+                                                <input type="number" placeholder="Product Weight" class="form-control" ng-model="ctrl.newInventory.productWeight">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9">
+                                                <button type="button" class="btn btn-primary active pull-right" ng-click="ctrl.addNewProduct()" ng-disabled="ctrl.addinvDisabled">Add Product</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button class="btn btn-primary" type="button" ng-click="ctrl.saveProduct()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hpanel">
-                        <div class="panel-body">
-                            <form class="form-horizontal" name="addproduct" ng-submit="ctrl.saveproduct()">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Upload Image</label>
-                                    <div class="col-sm-10">
-                                        <div class="fileinput fileinput-exists" data-provides="fileinput">
-                                            <span class="btn btn-default btn-file" style="margin-left: 0;">
-                                                <input type="file" name="frontImage" id="fileId" required="">
-                                            </span>
-                                            <button type="button" class="btn btn-primary">Primary</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                                    <div class="col-sm-10">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="dropdown">
-                                                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getCategory()">
-                                                   {{ctrl.selectedItem}}
-                                                   <span class="caret"></span>
-                                               </button>
-                                               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li ng-repeat="a in ctrl.category"><a ng-click="ctrl.categoryitemselected(a)">{{a.categoryName}}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                     <div class="text-center">
-                                         <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#categoryModal">Add Category</button>
-                                     </div>
-                                 </div>
-
-                                 <div class="col-md-3">
-                                    <div class="dropdown">
-                                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getVendor()">
-                                          {{ctrl.selectedvendor}}
-                                          <span class="caret"></span></button>
-                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <li ng-repeat="vendr in ctrl.vendor"><a ng-click="ctrl.Vendoritemselected(vendr)">{{vendr.contactName}}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vendorModal">Add Vendor</button></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group"><label class="col-sm-2 control-label">Products Name</label>
-                        <div class="col-sm-10"><input type="text" name="name" placeholder="Products Name" class="form-control" ng-model="ctrl.product.name">
-                        </div>
-                    </div>
-
-                    <div class="form-group"><label class="col-sm-2 control-label">Front Image</label>
-                        <div class="col-sm-10"><input type="text" name="imgurl" placeholder="Front Image" class="form-control" ng-model="ctrl.product.imgurl">
-                        </div>
-                    </div>
-
-                    <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                        <div class="col-sm-10"><textarea class="form-control" rows="5" id="comment" name="description" placeholder="Description" ng-model="ctrl.product.description"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group"><label class="col-sm-2 control-label">Shipping Time (Day)</label>
-                        <div class="col-sm-10"><input type="text" name="shippingTime" placeholder="Shipping Time (Day)" class="form-control" ng-model="ctrl.product.shippingTime">
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">Shipping Cost</label>
-                        <div class="col-sm-10"><input type="number" name="shippingRate" placeholder="Shipping Cost" class="form-control" ng-model="ctrl.product.shippingRate">
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">External Link</label>
-                        <div class="col-sm-10"><input type="number" name="externalLink" placeholder="External Link" class="form-control" ng-model="ctrl.product.externalLink">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group"><label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="btn-group" uib-dropdown>
-                                        <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getSize()">
-                                            {{ctrl.selectedSize}}
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
-                                            <li ng-repeat="Siz in ctrl.size"><a ng-click="ctrl.SizeSelected(Siz)">{{Siz.sizeText}}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#sizeModal">Add Size</button>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="btn-group" uib-dropdown>
-                                        <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getColor()">
-                                            {{ctrl.selectedColor}} 
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
-                                            <li ng-repeat="colr in ctrl.color"><a ng-click="ctrl.ColorSelected(colr)">{{colr.colorText}}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#colorModal">Add Color</button>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" name="orginalPrice" placeholder="Original Price" class="form-control" ng-model="ctrl.product.orginalPrice">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" name="salesPrice" placeholder="Sale Price" class="form-control" ng-model="ctrl.product.salesPrice">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-10">
-                            <div class="row">
-
-                                <div class="col-md-2">
-                                    <input type="number" name="count" placeholder="Quantity" class="form-control" ng-model="ctrl.product.count">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" name="productLength" placeholder="Product Length" class="form-control" ng-model="ctrl.product.productLength">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" name="productWidth" placeholder="Product Width" class="form-control" ng-model="ctrl.product.productWidth">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" name="productHeight" placeholder="Product Height" class="form-control" ng-model="ctrl.product.productHeight">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <input type="number" name="productWeight" placeholder="Product Weight" class="form-control" ng-model="ctrl.product.productWeight">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-primary active pull-right">Add Product</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                   <th>Size</th>
-                                   <th>Color</th>
-                                   <th>Original Price</th>
-                                   <th>Sale Price</th>
-                                   <th>Quantity</th>
-                                   <th>Product Length</th>
-                                   <th>Product Width</th>
-                                   <th>Product Height</th>
-                                   <th>Product Weight</th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                            <tr>
-                                <td>Selma</td>
-                                <td>0877 118 6905</td>
-                                <td>P.O. Box 410, 7331 Nec, St.</td>
-                                <td>Glenrothes</td>
-                                <td>Korea, North</td>
-                                <td>Korea, North</td>
-                                <td>Korea, North</td>
-                                <td>Korea, North</td>
-                                <td>Korea, North</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="hr-line-dashed"></div>
-                <div class="form-group">
-                    <div class="col-sm-12 text-right">
-                        <button class="btn btn-primary" type="submit">Save changes</button>
-                    </div>
-                </div>
-            </form>
         </div>
+        <!-- Right sidebar -->
+        <div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar">
+            
+        </div>
+        <!-- Footer -->
+        <footer class="footer" ng-include="'views/common/footer.html'"></footer>
     </div>
-</div>
-</div>
-</div>
-<!-- Right sidebar -->
-<div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>
-<!-- Footer -->
-<footer class="footer" ng-include="'views/common/footer.html'"></footer>
-</div>
 
 <!-- Modal -->
 <!--Add Category modal-->
 <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" 
 aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <button type="button" class="close" 
-            data-dismiss="modal">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-        <h4 class="modal-title text-center" id="myModalLabel">
-            Add Category
-        </h4>
-    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                    data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    Add Category
+                </h4>
+            </div>
 
-    <!-- Modal Body -->
-    <div class="modal-body">
-        <form role="form">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Category Name</label>
-            <input type="text" class="form-control"
-            id="exampleInputEmail1" placeholder="Category Name" required=""/>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Category Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Category Name" required="" ng-model="ctrl.categoryDto.categoryName"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Category Parent</label>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.PgetCategory()">
+                            {{ctrl.PselectedItem}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu5">
+                            <li ng-repeat="a in ctrl.Pcategory"><a ng-click="ctrl.Pcategoryitemselected(a)">{{a.categoryName}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="ctrl.saveCategory()">
+                    Save
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Category Parent</label>
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.PgetCategory()">
-               {{ctrl.PselectedItem}}
-               <span class="caret"></span>
-           </button>
-           <ul class="dropdown-menu" aria-labelledby="dropdownMenu5">
-            <li ng-repeat="a in ctrl.Pcategory"><a ng-click="ctrl.Pcategoryitemselected(a)">{{a.categoryName}}</a></li>
-        </ul>
     </div>
-</div>
-</form>
-</div>
-
-<!-- Modal Footer -->
-<div class="modal-footer">
-    <button type="button" class="btn btn-primary">
-        Save changes
-    </button>
-</div>
-</div>
-</div>
 </div>
 <!--Add Category modal-->
 
 <!--Add vendor modal-->
 <div class="modal fade" id="vendorModal" role="dialog">
-  <div class="modal-dialog">
-    <form class="form-horizontal" name="ctrl.vendor" ng-submit="ctrl.addVendorSubmit()">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add Vendor</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="contactName " type="text" placeholder="Vendor Name" required="" ng-model="ctrl.vendor.contactName">
+    <div class="modal-dialog">
+        <!-- <form class="form-horizontal" name="ctrl.vendor" ng-submit="ctrl.addVendorSubmit()"> -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Vendor</h4>
                 </div>
+                <div class="modal-body">
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="contactName " type="text" placeholder="Vendor Name" required="" ng-model="ctrl.vendor.contactName">
+                    </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="streetOne" type="text" placeholder="Street" required="" ng-model="ctrl.vendor.streetOne">
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="streetOne" type="text" placeholder="Street" required="" ng-model="ctrl.vendor.streetOne">
+                    </div>
+
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="streetTwo" type="text" placeholder="Street (Optional)" ng-model="ctrl.vendor.streetTwo">
+                    </div>
+
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="city" type="text" placeholder="City" required="" ng-model="ctrl.vendor.city">
+                    </div>
+
+                    <div class="form-group has-success has-feedback">
+                       <input class="form-control" name="state" type="text" placeholder="State" required="" ng-model="ctrl.vendor.state">
+                    </div>
+
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="country" type="text" placeholder="Country" required="" ng-model="ctrl.vendor.country">
+                    </div>
+
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="zipCode" type="text" placeholder="Zip" required="" ng-model="ctrl.vendor.zipCode">
+                    </div>
+
+                    <div class="form-group has-success has-feedback">
+                        <input class="form-control" name="phone" type="text" placeholder="Phone" required="" ng-model="ctrl.vendor.phone">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9"></div>
+                        <div class="col-sm-3">
+                            <span class="pull-right">
+                                <button type="submit" id="addVendorSubmit" class="btn btn-primary" ng-click="ctrl.addVendorSubmit()">Save</button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="streetTwo" type="text" placeholder="Street (Optional)" ng-model="ctrl.vendor.streetTwo">
-                </div>
-
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="city" type="text" placeholder="City" required="" ng-model="ctrl.vendor.city">
-                </div>
-
-                <div class="form-group has-success has-feedback">
-                   <input class="form-control" name="state" type="text" placeholder="State" required="" ng-model="ctrl.vendor.state">
-               </div>
-
-               <div class="form-group has-success has-feedback">
-                <input class="form-control" name="country" type="text" placeholder="Country" required="" ng-model="ctrl.vendor.country">
             </div>
-
-            <div class="form-group has-success has-feedback">
-                <input class="form-control" name="zipCode" type="text" placeholder="Zip" required="" ng-model="ctrl.vendor.zipCode">
-            </div>
-
-            <div class="form-group has-success has-feedback">
-                <input class="form-control" name="phone" type="text" placeholder="Phone" required="" ng-model="ctrl.vendor.phone">
-            </div>
-
-            <div class="row">
-                <div class="col-sm-9"></div>
-                <div class="col-sm-3">
-                    <span class="pull-right">
-                        <button type="submit" id="addVendorSubmit" class="btn btn-success btn-lg active">Save</button>
-                    </span>
-                </div>
-            </div>
-        </div>
+        <!-- </form> -->
     </div>
-</form>
 </div>
-</div>
+
 <!--Add vendor modal-->
 
 <!--Add Color modal-->
@@ -337,7 +412,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                     <input class="form-control" name="addcolor" id="addcolorId" type="text" placeholder="Color Name" required="">
                 </div>
                 <div>
-                    <button id="addColorSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+                    <button id="addColorSubmit" type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
                 </div>
                 <!--</form>-->
             </div>
@@ -416,18 +491,18 @@ aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="text">Specification</label>
-                            <input class="form-control" name="Specification" id="addSpecificationId" type="text" placeholder="Specification" required="">
+                            <input class="form-control" name="Specification" id="addSpecificationId" type="text" placeholder="Specification" required="" ng-model="ctrl.specificationDto.name">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="text">Value</label>
-                            <input class="form-control" name="Value" id="addSpecificationValue" type="text" placeholder="Value" required="">
+                            <input class="form-control" name="Value" id="addSpecificationValue" type="text" placeholder="Value" required="" ng-model="ctrl.specificationDto.value">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="addSpecificationSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+                    <button id="addSpecificationSubmit" type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.addSpecification()"><span class="glyphicon glyphicon-save"></span>Save</button>
                 </div>
             </div>
         </div>
@@ -447,10 +522,10 @@ aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="text">Color Name:</label>
-                    <input class="form-control" name="addvalue" id="value-text" type="text" placeholder="Value" required="">
+                    <input class="form-control" name="addvalue" id="value-text" type="text" placeholder="Value" required="" ng-model="ctrl.specificationDto1.value">
                 </div>
                 <div>
-                    <button id="addValueSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+                    <button id="addValueSubmit" type="button" class="btn btn-default" data-dismiss="modal" ng-click="ctrl.addSpecificationValue()"><span class="glyphicon glyphicon-save"></span>Save</button>
                 </div>
             </div>
         </div>

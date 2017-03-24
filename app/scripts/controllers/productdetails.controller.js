@@ -7,6 +7,7 @@
     productdetailsController.$inject = ['$location', '$scope', 'sweetAlert', 'adminService', '$stateParams'];
 
     function productdetailsController($location, $scope, sweetAlert, adminService, $stateParams) {
+        //***********************On Load***************************//
         var ctrl = this;
         console.log($stateParams);
         ctrl.product = $stateParams.product;
@@ -14,12 +15,40 @@
         ctrl.selectedItem= 'Select Category';
         ctrl.selectedvendor= 'Select Vendor';
         ctrl.PselectedItem= 'Select Parent Category';
-        
 
+        //******************Update product*************************//
+        ctrl.updateProduct = function(){
+            var res1 = JSON.stringify(ctrl.product.specificationsMap);
+            var res = res1.replace(/"|{|}/gi, function myFunction(x){return '';});
+            ctrl.product.specifications = res +",";
+            if(ctrl.product.categoryId != "" && ctrl.product.name != "" && ctrl.product.imgurl != "" && ctrl.product.categoryId != "" && ctrl.product.vendorId != ""){
+                console.log('hi....................');
+                adminService.updateProduct(ctrl.product)
+                .success(function(data){})
+                .error(function(error){})
+            }
+        };
+
+        //********************Add new Specification******************//
+        ctrl.addNewSpecification = function(){
+            ctrl.product.specificationsMap[ctrl.newSpecification] = ctrl.newSpecificationValue;
+            ctrl.newSpecification = '';
+            ctrl.newSpecificationValue = '';
+        };
+
+        //********************Remove Specification******************//
+        ctrl.removeSpecification = function (key) {
+            console.log(key);
+            delete ctrl.product.specificationsMap[key];
+            console.log(ctrl.product.specificationsMap);
+        };
+
+        //*******************For category dropdown********************//
         ctrl.categoryitemselected = function (item) {
             ctrl.selectedItem = item.categoryName;
+            ctrl.product.categoryId = item.categoryId;
             console.log(item.categoryId);
-        }
+        };
 
         ctrl.getCategory = function (){
             adminService.getCategory ()
@@ -32,9 +61,12 @@
          });
         };
 
+        //****************For vendor dropdown**********************//
         ctrl.Vendoritemselected = function (item2) {
             ctrl.selectedvendor = item2.contactName;
-        }
+            ctrl.product.vendorId = item2.userId;
+            console.log(item2.userId);
+        };
         ctrl.getVendor = function (){
             adminService.getVendor ()
             .success(function (data) {
@@ -46,10 +78,11 @@
          });
         };
 
+        //*********************For parent category dropdown*********************//
         ctrl.Pcategoryitemselected = function (item) {
             ctrl.PselectedItem = item.categoryName;
             
-        }
+        };
 
         ctrl.PgetCategory = function (){
             adminService.getCategory ()
@@ -62,8 +95,7 @@
          });
         };
 
-        // ----------------ADD VENDOR MODAL----------------- //
-
+        //******************ADD VENDOR MODAL**************************//
         ctrl.vendor = {
             contactName: '',
             streetOne: '',
@@ -72,7 +104,7 @@
             state: '',
             country: '',
             zipCode: '',
-            phone: '',
+            phone: ''
         };
 
         ctrl.addVendorSubmit = function () {

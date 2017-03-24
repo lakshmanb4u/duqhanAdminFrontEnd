@@ -1,5 +1,6 @@
 angular
         .module('homer')
+        // .constant('BASE_URL_CONSTANT', 'duqhan.us-west-2.elasticbeanstalk.com/')
         .constant('BASE_URL_CONSTANT', 'http://192.168.1.100:8084/')
         .constant('SUPPORTING_DATE_FORMATS_CONSTANT', [
             'dd-MMMM-yyyy',
