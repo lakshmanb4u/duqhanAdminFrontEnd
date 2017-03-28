@@ -64,12 +64,12 @@ function adminService($http, BASE_URL_CONSTANT) {
                 data: productBean
             });
         },
-        uploadImage: function(imgBean){
+        uploadImage: function(productBean){
             return $http({
                 method: 'POST',
                 url: BASE_URL_CONSTANT + 'admin/save-product-image',
-                headers: {'Content-Type': 'application/json'},
-                data: imgBean
+                headers: {'Content-Type': 'multipart/form-data'},
+                data: productBean
             });
         },
         getSpecifications: function(categoryId){

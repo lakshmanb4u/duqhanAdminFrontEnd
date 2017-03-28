@@ -338,6 +338,8 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider) {
     // api_secret: 'BjqvouftX41P4NHFbAEPFaBWFog' // optional
     // });
 
+
+
     angular
     .module('homer')
     .config(configState)

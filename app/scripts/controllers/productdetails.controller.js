@@ -61,6 +61,23 @@
          });
         };
 
+        ctrl.categoryDto = {};
+        ctrl.categoryDto.categoryName = null;
+        ctrl.categoryDto.patentId = null;
+        ctrl.saveCategory = function(){
+            console.log(ctrl.categoryDto);
+            if(ctrl.categoryDto.categoryName && ctrl.categoryDto.patentId){
+                adminService.saveCategory (ctrl.categoryDto)
+                .success(function (data) {
+                    ctrl.categoryDto.categoryName = null;
+                    ctrl.categoryDto.patentId = null;
+                })
+                .error(function (error) {
+                 console.log('Unable to load subject data');
+                });
+            }
+        };
+
         //****************For vendor dropdown**********************//
         ctrl.Vendoritemselected = function (item2) {
             ctrl.selectedvendor = item2.contactName;
@@ -81,7 +98,7 @@
         //*********************For parent category dropdown*********************//
         ctrl.Pcategoryitemselected = function (item) {
             ctrl.PselectedItem = item.categoryName;
-            
+            ctrl.categoryDto.patentId = item.categoryId;
         };
 
         ctrl.PgetCategory = function (){
