@@ -1,0 +1,21 @@
+<div class="row m-t-lg">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="hpanel hbgorange">
+      <div class="panel-body">
+        <div class="text-center">
+          <h1 class="text-big font-light">Crawl a link</h1>
+          <p>Provide the link of a list page in aliexpress.com and crawl it to get all the products link in it</p>
+          <div class="col-sm-12 m-t-lg">
+            <input type="text" placeholder="https://www.aliexpress.com/" class="form-control input-lg m-b-lg" ng-model="ctrl.listURL">
+          </div>
+          <div class="col-sm-12">
+            <button id="ladda-button-crawl-new-link" type="button" class="btn btn-warning m-b-lg btn-lg w-lg ladda-button" data-style="expand-right" ng-click="ctrl.scrapListURL()">Crawl</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer" style="background: #c0392b; color: white;" ng-show="ctrl.crawlError">
+        {{ctrl.crawlErrorMsg}}
+      </div>
+    </div>
+  </div>
+</div>

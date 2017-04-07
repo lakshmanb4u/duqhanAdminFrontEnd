@@ -1,0 +1,79 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+  <div class="normalheader small-header">
+    <div class="hpanel">
+      <div class="panel-body">
+        <div id="hbreadcrumb" class="pull-right">
+          <ol class="hbreadcrumb breadcrumb">
+            <!--<li><a sref="products">Products</a></li>
+            <li>
+              <span>App views</span>
+            </li>-->
+            <li class="active">
+              <span>Products</span>
+            </li>
+          </ol>
+        </div>
+        <h2 class="font-light m-b-xs">
+          Products
+        </h2>
+        <small>List of products</small>
+      </div>
+    </div>
+  </div>
+  <div class="content" animate-panel effect="zoomIn">
+    <div class="row projects">
+      <div class="col-lg-12" ng-repeat="product in ctrl.products">
+        <div class="hpanel hgreen">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-7">
+                <h4 class="text-capitalize"><a sref="">{{product.name}}</a></h4>
+                <p>{{product.description}}</p>
+                <p><span class="label label-success">{{product.categoryName}}</span></p>
+
+                <button class="btn btn-info" type="button" ui-sref="product({product: product})"><i class="fa fa-pencil-square-o"></i> Edit</button>
+
+                <button class="btn btn-warning2" type="button" ui-sref="inventory({product: product})"><i class="fa fa-clone"></i> Inventory</button>
+
+              </div>
+              <div class="col-sm-3">
+                <div class="table-responsive">
+                  <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+                    <tbody>
+                      <tr>
+                        <th>Original Price</th>
+                        <td><i class="fa fa-inr"></i> {{product.price}}</td>
+                      </tr>
+                      <tr>
+                        <th>Selling Price</th>
+                        <td><i class="fa fa-inr"></i> {{product.discountedPrice}}</td>
+                      </tr>
+                      <tr>
+                        <th>Discount</th>
+                        <td>{{product.discountPCT}}%</td>
+                      </tr>
+                      <tr>
+                        <th>Availability</th>
+                        <td>{{product.available}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-sm-2 project-info">
+                <img class="img-responsive" src="{{product.imgurl}}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

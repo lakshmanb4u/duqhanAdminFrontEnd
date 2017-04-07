@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="hpanel">
+      <div class="panel-heading hbuilt">
+        List of all the products in the aliexpress.com Page
+      </div>
+      <div class="alert alert-{{ctrl.status}}">
+        <i class="fa" ng-class="{ 'fa-spinner fa-spin': ctrl.status == 'warning', 'fa-download': ctrl.status == 'success', 'fa-close': ctrl.status == 'danger' }"></i> {{ctrl.statusMsg}}
+      </div>
+      <div class="panel-body">
+
+        <div class="btn-group btn-block m-b" ng-repeat="product in ctrl.productLinks">
+          <a href="{{product.statusCode}}" class="btn" ng-class="{'btn-info':product.status == 0, 'btn-success':product.status == 1}" target="_blank"><i class="fa fa-external-link"></i></a>
+          <a href="{{product.statusCode}}" class="btn btn-default" target="_blank" style="width: calc(100% - 130px); text-overflow: ellipsis; overflow: hidden;">{{product.statusCode}}</a>
+          <button class="btn btn-info ladda-button" type="button" id="ladda-button-crawl-{{product.id}}" data-style="expand-right" ng-click="ctrl.scrapProduct(product, $index)" ng-show="product.status == 0"><i class="fa fa-cloud-download"></i></button>
+          <button class="btn btn-success" type="button" ng-show="product.status == 1" ui-sref="scrapper.productlist"><i class="fa fa-check-square-o"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

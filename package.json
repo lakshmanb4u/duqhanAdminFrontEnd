@@ -1,8 +1,9 @@
 {
   "name": "HOMER",
-  "version": "1.9.0",
+  "version": "1.97.0",
   "description": "HOMER - AngularJs WebApp Theme",
   "dependencies": {
+    "cloudinary-angular": "^1.0.1",
     "grunt": "^0.4.5"
   },
   "devDependencies": {

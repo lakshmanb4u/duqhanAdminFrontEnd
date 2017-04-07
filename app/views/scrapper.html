@@ -1,0 +1,118 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+  <div class="normalheader small-header">
+    <div class="hpanel">
+      <div class="panel-body">
+        <div id="hbreadcrumb" class="pull-right">
+          <ol class="hbreadcrumb breadcrumb">
+            <li class="active">
+              <span>Scrapper</span>
+            </li>
+          </ol>
+        </div>
+        <h2 class="font-light m-b-xs">
+          Scrapper
+        </h2>
+        <small>Scrapp a list page</small>
+      </div>
+    </div>
+  </div>
+  <div class="content" animate-panel effect="zoomIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hpanel hgreen">
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Provide the link of a list page in aliexpress.com</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <input type="text" class="form-control" ng-model="ctrl.listURL">
+                  <span class="input-group-btn"> 
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.scrapListURL()">Crawl</button> 
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="hpanel" ng-hide="ctrl.processing === 0">
+          <div class="panel-heading hbuilt">
+            List of all the products in the aliexpress.com Page
+          </div>
+          <div class="alert alert-warning" ng-show="ctrl.processing === 1">
+            <i class="fa fa-spinner fa-spin"></i> Crawling aliexpress.com
+          </div>
+          <div class="alert alert-success" ng-show="ctrl.processing === 2">
+            <i class="fa fa-download"></i> {{ctrl.productLinks.length}} products crawled.
+          </div>
+          <div class="panel-body no-padding">
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="product in ctrl.productLinks" style="word-break: break-word;">
+                <a href="{{product.statusCode}}">{{product.statusCode}}</a>
+                <button id="ladda-button-crawl-{{product.id}}" class="ladda-button btn btn-info m-t-md" data-style="zoom-in" ng-click="ctrl.scrapProduct(product)" ng-disabled="product.status == 1">Crawl</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" ng-repeat="product in ctrl.products">
+        <div class="hpanel hgreen">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-4 project-info">
+                <img class="img-responsive" src="{{product.imgurl}}" alt="">
+              </div>
+              <div class="col-sm-8">
+                <h4 class="text-capitalize"><a sref="">{{product.name}}</a></h4>
+                <p>{{product.description}}</p>
+                <p><span class="label label-success">{{product.categoryName}}</span></p>
+
+                <!--<button class="btn btn-info" type="button" ui-sref="product({product: product})"><i class="fa fa-pencil-square-o"></i> Edit</button>
+
+                <button class="btn btn-warning2" type="button"><i class="fa fa-clone"></i> Inventory</button>-->
+
+              </div>
+              <!--<div class="col-sm-3">
+                <div class="table-responsive">
+                  <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+                    <tbody>
+                      <tr>
+                        <th>Original Price</th>
+                        <td><i class="fa fa-inr"></i> {{product.price}}</td>
+                      </tr>
+                      <tr>
+                        <th>Selling Price</th>
+                        <td><i class="fa fa-inr"></i> {{product.discountedPrice}}</td>
+                      </tr>
+                      <tr>
+                        <th>Discount</th>
+                        <td>{{product.discountPCT}}%</td>
+                      </tr>
+                      <tr>
+                        <th>Availability</th>
+                        <td>{{product.available}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

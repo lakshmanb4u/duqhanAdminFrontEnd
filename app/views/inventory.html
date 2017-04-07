@@ -4,232 +4,213 @@
 <aside id="menu" ng-include="'views/common/navigation.html'"></aside>
 <!-- Main Wrapper -->
 <div id="wrapper">
-    <div class="content" animate-panel effect="zoomIn">
-        <div class="row">
-            <div class="col-lg-12 text-center m-t-md">
-                <h2>
-                    INVENTORY
-                </h2>
-            </div>
+  <div class="normalheader small-header">
+    <div class="hpanel">
+      <div class="panel-body">
+        <button class="btn btn-info pull-right" ng-click="ctrl.updateInventory()">Save changes</button>
+        <h2 class="font-light m-b-xs">
+          Inventory
+        </h2>
+        <div id="hbreadcrumb">
+          <ol class="hbreadcrumb breadcrumb">
+            <li><a ui-sref="products">Products</a></li>
+            <li class="active">
+              <span class="text-capitalize">{{ctrl.product.name}}</span>
+            </li>
+          </ol>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="hpanel">
-                    <div class="panel-body">
-                        
-                        <div class="">
-                            <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-	                                    <th>Size</th>
-	                                    <th>Color</th>
-	                                    <th>Original Price</th>
-	                                    <th>Sale Price</th>
-	                                    <th>Quantity</th>
-	                                    <th>Product Length</th>
-	                                    <th>Product Width</th>
-	                                    <th>Product Height</th>
-	                                    <th>Product Weight</th>
-                                 	</tr>
-                             	</thead>
-	                             <tbody>
-	                                <tr ng-repeat="map in ctrl.productInventory">
-	                                    <td>
-	                                    	<div class="btn-group" uib-dropdown>
-	                                            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getSize()">
-	                                                {{map.sizeText || 'No Size'}}
-	                                                <span class="caret"></span>
-	                                            </button>
-	                                            <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
-	                                                <li ng-repeat="Siz in ctrl.size">
-	                                                	<a ng-click="ctrl.thisSizeSelected(Siz, map)">{{Siz.sizeText}}</a>
-	                                                </li>
-	                                            </ul>
-	                                        </div>
-	                                    </td>
-	                                    <td>
-	                                    	<div class="btn-group" uib-dropdown>
-	                                            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getColor()">
-	                                                {{map.colorText || 'No Color'}}
-	                                                <span class="caret"></span>
-	                                            </button>
-	                                            <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
-	                                                <li ng-repeat="color in ctrl.color">
-	                                                	<a ng-click="ctrl.thisColorSelected(color, map)">{{color.colorText}}</a>
-	                                                </li>
-	                                            </ul>
-                                        	</div>
-	                                    	
-	                                   	</td>
-	                                    <td>
-	                                        <input class="form-control" id="priceid" type="number" name="priceid" pattern="[0-9]+([\.,][0-9]+)?" step="1" ng-model="map.orginalPrice" min="0">
-	                                    </td>
-	                                    <td>
-	                                        <input class="form-control" id="discountid" value="0" name="discountedPrice" type="number" step="1" pattern="[0-9]+([\.,][0-9]+)?" ng-model="map.salesPrice" min="0">
-	                                    </td>
-	                                    <td>
-	                                        <input type="number" class="form-control" ng-model="map.count">
-	                                    </td>
-	                                    <td>
-	                                        <input type="number" class="form-control" ng-model="map.productLength">
-	                                    </td>
-	                                    <td>
-	                                        <input type="number" class="form-control" ng-model="map.productWidth">
-	                                    </td>
-	                                    <td>
-	                                        <input type="number" class="form-control" ng-model="map.productHeight">
-	                                    </td>
-	                                    <td>
-	                                        <input type="number" class="form-control" ng-model="map.productWeight">
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                	<td>
-	                                		<div class="btn-group" uib-dropdown>
-	                                            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getSize()">
-	                                                {{ctrl.selectedSize}}
-	                                                <span class="caret"></span>
-	                                            </button>
-	                                            <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
-	                                                <li ng-repeat="Siz in ctrl.size"><a ng-click="ctrl.SizeSelected(Siz)">{{Siz.sizeText}}</a></li>
-	                                            </ul>
-                                        	</div>
-	                                	</td>
-	                                	<td>
-	                                		<div class="btn-group" uib-dropdown>
-	                                            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="ctrl.getColor()">
-	                                                {{ctrl.selectedColor}} 
-	                                                <span class="caret"></span>
-	                                            </button>
-	                                            <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
-	                                                <li ng-repeat="colr in ctrl.color"><a ng-click="ctrl.ColorSelected(colr)">{{colr.colorText}}</a></li>
-	                                            </ul>
-                                        	</div>
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Original Price" class="form-control" ng-model="ctrl.newInventory.orginalPrice">
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Sale Price" class="form-control" ng-model="ctrl.newInventory.salesPrice">
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Quantity" class="form-control" ng-model="ctrl.newInventory.count">
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Product Length" class="form-control" ng-model="ctrl.newInventory.productLength">
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Product Width" class="form-control" ng-model="ctrl.newInventory.productWidth">
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Product Height" class="form-control" ng-model="ctrl.newInventory.productHeight">
-	                                	</td>
-	                                	<td>
-	                                		<input type="number" placeholder="Product Weight" class="form-control" ng-model="ctrl.newInventory.productWeight">
-	                                	</td>
-	                                </tr>
-	                                <tr>
-	                                	<td colspan="9">
-	                                		<button type="button" class="btn btn-primary active pull-right" ng-click="ctrl.addNewProduct()">Add Product</button>
-	                                	</td>
-	                                </tr>
-	                            </tbody>
-                        	</table>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <div class="col-sm-12 text-right">
-                                <button class="btn btn-primary" type="button" ng-click="ctrl.updateInventory()">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-
-<!-- Right sidebar -->
-<div id="right-sidebar" ng-include="'views/common/right_sidebar.html'" class="sidebar-open" ng-show="rightSidebar"></div>
-<!-- Footer -->
-<footer class="footer" ng-include="'views/common/footer.html'"></footer>
+  </div>
+  <div class="content" animate-panel effect="zoomIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="hpanel hgreen">
+          <div class="panel-body">
+            <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Color</th>
+                  <th>Original Price</th>
+                  <th>Sale Price</th>
+                  <th>Quantity</th>
+                  <th>Product Length</th>
+                  <th>Product Width</th>
+                  <th>Product Height</th>
+                  <th>Product Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="map in ctrl.productInventory">
+                  <td>
+                    <div class="btn-group" uib-dropdown>
+                      <button type="button" class="btn btn-default" uib-dropdown-toggle>{{map.sizeText || 'No Size'}} <span class="caret"></span></button>
+                      <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
+                        <li ng-repeat="Siz in ctrl.size">
+                          <a ng-click="ctrl.thisSizeSelected(Siz, map)">{{Siz.sizeText}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group" uib-dropdown>
+                      <button type="button" class="btn btn-default" uib-dropdown-toggle>{{map.colorText || 'No Color'}} <span class="caret"></span></button>
+                      <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
+                        <li ng-repeat="color in ctrl.color">
+                          <a ng-click="ctrl.thisColorSelected(color, map)">{{color.colorText}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <input class="form-control" id="priceid" type="number" name="priceid" pattern="[0-9]+([\.,][0-9]+)?" step="1" ng-model="map.orginalPrice" min="0">
+                  </td>
+                  <td>
+                    <input class="form-control" id="discountid" value="0" name="discountedPrice" type="number" step="1" pattern="[0-9]+([\.,][0-9]+)?" ng-model="map.salesPrice" min="0">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" ng-model="map.count">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" ng-model="map.productLength">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" ng-model="map.productWidth">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" ng-model="map.productHeight">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" ng-model="map.productWeight">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="btn-group" uib-dropdown>
+                      <button type="button" class="btn btn-info btn-outline" uib-dropdown-toggle>{{ctrl.selectedSize}} <span class="caret"></span></button>
+                      <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu3">
+                        <li ng-repeat="Siz in ctrl.size"><a ng-click="ctrl.SizeSelected(Siz)">{{Siz.sizeText}}</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group" uib-dropdown>
+                      <button type="button" class="btn btn-info btn-outline" uib-dropdown-toggle>{{ctrl.selectedColor}} <span class="caret"></span></button>
+                      <ul role="menu" uib-dropdown-menu="" aria-labelledby="dropdownMenu4">
+                        <li ng-repeat="colr in ctrl.color"><a ng-click="ctrl.ColorSelected(colr)">{{colr.colorText}}</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Original Price" class="form-control" ng-model="ctrl.newInventory.orginalPrice">
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Sale Price" class="form-control" ng-model="ctrl.newInventory.salesPrice">
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Quantity" class="form-control" ng-model="ctrl.newInventory.count">
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Product Length" class="form-control" ng-model="ctrl.newInventory.productLength">
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Product Width" class="form-control" ng-model="ctrl.newInventory.productWidth">
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Product Height" class="form-control" ng-model="ctrl.newInventory.productHeight">
+                  </td>
+                  <td>
+                    <input type="number" placeholder="Product Weight" class="form-control" ng-model="ctrl.newInventory.productWeight">
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <button type="button" class="btn btn-info btn-outline pull-right" ng-click="ctrl.addNewProduct()">Add Product</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal -->
 <!--Add Color modal-->
 <div class="modal fade" id="colorModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Color</h4>
-            </div>
-            <div class="modal-body">
-                <!--<form class="form-horizontal" id="addColor" name="ColorBean" action="/web/save-color">-->
-                <div class="form-group">
-                    <label for="text">Color Name:</label>
-                    <input class="form-control" name="addcolor" id="addcolorId" type="text" placeholder="Color Name" required="">
-                </div>
-                <div>
-                    <button id="addColorSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
-                </div>
-                <!--</form>-->
-            </div>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Color</h4>
+      </div>
+      <div class="modal-body">
+        <!--<form class="form-horizontal" id="addColor" name="ColorBean" action="/web/save-color">-->
+        <div class="form-group">
+          <label for="text">Color Name:</label>
+          <input class="form-control" name="addcolor" id="addcolorId" type="text" placeholder="Color Name" required="">
         </div>
+        <div>
+          <button id="addColorSubmit" type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+        </div>
+        <!--</form>-->
+      </div>
     </div>
+  </div>
 </div>
 <!--Add Color modal-->
 
 <!--Add Size modal-->
 <div class="modal fade" id="sizeModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Size</h4>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Size</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="form-group">
+              <input class="form-control" name="addsize" id="AddSizeGroupId" type="text" placeholder="New size group" required="">
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <input class="form-control" name="addsize" id="AddSizeGroupId" type="text" placeholder="New size group" required="">
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="button" id="addSizeGroupSubmit" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
-                    </div>
-                </div>
-                <hr><hr>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="dropdown">
-                              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getSizeGroup()">
+          </div>
+          <div class="col-sm-2">
+            <button type="button" id="addSizeGroupSubmit" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+          </div>
+        </div>
+        <hr>
+        <hr>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.getSizeGroup()">
                                  {{ctrl.SizeGrupselectedItem}}
                                  <span class="caret"></span>
                              </button>
-                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li ng-repeat="a in ctrl.Sizegroup"><a ng-click="ctrl.SizeGrupItemSelected(a)">{{a.sizeGroupId}}</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input class="form-control" name="size" id="size-name" type="text" placeholder="Size" required="">
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <button type="button" id="addSizeSubmit" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li ng-repeat="a in ctrl.Sizegroup"><a ng-click="ctrl.SizeGrupItemSelected(a)">{{a.sizeGroupId}}</a></li>
+                </ul>
+              </div>
             </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input class="form-control" name="size" id="size-name" type="text" placeholder="Size" required="">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" id="addSizeSubmit" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-save"></span>Save</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!--Add Size modal-->
-
-        
-
-
+  <!--Add Size modal-->
