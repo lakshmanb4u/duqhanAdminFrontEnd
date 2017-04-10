@@ -88,7 +88,7 @@
 
     //***********************************Specifications block*******************************//
 
-    ctrl.specificationValueSelected = function(value) {
+   /* ctrl.specificationValueSelected = function(value) {
       ctrl.selectedspecificationValue = value;
     };
 
@@ -126,6 +126,21 @@
           ctrl.productBean.specifications = ctrl.selectedspecifications + ":" + ctrl.selectedspecificationValue + ",";
         }
       }
+    };*/
+
+    //********************Add new Specification******************//
+    ctrl.addNewSpecification = function() {
+      ctrl.productBean.specificationsMap[ctrl.newSpecification] = ctrl.newSpecificationValue;
+      ctrl.newSpecification = '';
+      ctrl.newSpecificationValue = '';
+      console.log(ctrl.productBean.specificationsMap);
+    };
+
+    //********************Remove Specification******************//
+    ctrl.removeSpecification = function(key) {
+      console.log(key);
+      delete ctrl.productBean.specificationsMap[key];
+      console.log(ctrl.productBean.specificationsMap);
     };
 
     //==================================save new specification=================================//
@@ -180,6 +195,48 @@
         });
     };
 
+    ctrl.sizeGroupName = null;
+    ctrl.saveSizeGroup = function(){
+      if(ctrl.sizeGroupName){
+        AdminServ.addSizeGroup(ctrl.sizeGroupName).success(function(data){ctrl.sizeGroupName = null;}).error(function(error){});
+      }
+    };
+
+    ctrl.sizeDto = {
+      sizeGroupId: '',
+      sizeText: ''
+    };
+    ctrl.saveSize = function(){
+      if(ctrl.sizeDto.sizeGroupId && ctrl.sizeDto.sizeText){
+        AdminServ.addSize(ctrl.sizeDto)
+        .success(function(data){
+          ctrl.sizeDto = {
+          sizeGroupId: '',
+          sizeText: ''
+          };
+        })
+        .error(function(error){});
+      }
+    };
+
+    // --------------------------------- //
+
+    ctrl.SizeGrupItemSelected = function(item) {
+      ctrl.SizeGrupselectedItem = item.sizeText;
+      ctrl.sizeDto.sizeGroupId = item.sizeGroupId;
+    }
+
+    ctrl.getSizeGroup = function() {
+      AdminServ.getSizeGroup()
+        .success(function(data) {
+          ctrl.Sizegroup = data.sizeGroupDtos;
+          console.log(ctrl.Sizegroup);
+        })
+        .error(function(error) {
+          console.log('Unable to load subject data');
+        });
+    };
+
     //***********************************Color block*******************************//
     ctrl.thisColorSelected = function(color, map) {
       map.colorText = color.colorText;
@@ -201,22 +258,13 @@
         });
     };
 
-    // --------------------------------- //
-
-    ctrl.SizeGrupItemSelected = function(item) {
-      ctrl.SizeGrupselectedItem = item.sizeGroupId;
-    }
-
-    ctrl.getSizeGroup = function() {
-      AdminServ.getSizeGroup()
-        .success(function(data) {
-          ctrl.Sizegroup = data.sizeGroupDtos;
-          console.log(ctrl.Sizegroup);
-        })
-        .error(function(error) {
-          console.log('Unable to load subject data');
-        });
+    ctrl.colorName = null;
+    ctrl.saveColor = function(){
+      if(ctrl.colorName){
+        AdminServ.addColor(ctrl.colorName).success(function(data){ctrl.colorName = null;}).error(function(error){});
+      }
     };
+
 
     // ----------------ADD VENDOR MODAL----------------- //
 
@@ -291,8 +339,12 @@
       shippingTime: null,
       shippingRate: null,
       sizeColorMaps: [],
-      imageDtos: []
+      imageDtos: [],
+      specificationsMap: {}
     };
+
+    ctrl.newSpecification = '';
+    ctrl.newSpecificationValue = '';
 
     //********************************imgage upload*****************************//
     ctrl.uploadImage = function() {
@@ -367,15 +419,77 @@
             sizeId: null,
             sizeText: null
           };
+          ctrl.selectedColor = 'Select Color';
+          ctrl.selectedSize = 'Select size';
         }
       }
     };
 
+    //******************Image upload**************************//
+    $scope.$watch('ctrl.thumbnail', function(newVal, oldVal) {
+      if (ctrl.thumbnail != null || ctrl.thumbnail != undefined) {
+        ctrl.uploadThumbnail(ctrl.thumbnail);
+      }
+    });
+    ctrl.uploadThumbnail = function(file) {
+      console.log(file);
+      if (file) {
+        $('.loader').show();
+        AdminServ.uploadToCloudinary(file)
+          .then(function(data) {
+            console.log(data);
+            ctrl.productBean.imgurl = data.url;
+            $('.loader').hide();
+          })
+          .catch(function(error) {
+            $('.loader').hide();
+            console.log('Unable to load subject data');
+          });
+      }
+    };
+    $scope.$watch('ctrl.galleryImage', function(newVal, oldVal) {
+      if (ctrl.galleryImage != null || ctrl.galleryImage != undefined) {
+        ctrl.uploadGalleryImage(ctrl.galleryImage);
+      }
+    });
+    ctrl.uploadGalleryImage = function(file) {
+      console.log(file);
+      if (file) {
+        $('.loader').show();
+        AdminServ.uploadToCloudinary(file)
+          .then(function(data) {
+            console.log(data);
+            // ctrl.product.imgurl = data.url;
+            var img = {};
+            img.imgUrl = data.url;
+            img.id = null;
+            ctrl.productBean.imageDtos.push(img);
+            $('.loader').hide();
+          })
+          .catch(function(error) {
+            $('.loader').hide();
+            console.log('Unable to load subject data');
+          });
+      }
+    };
+    //******************Image upload End**************************//
+
+    ctrl.removeThumbnail = function(index) {
+      // ctrl.productBean.imgurl = null;
+      ctrl.productBean.imageDtos.splice(index,1);
+    };
+
     //************************************Save producr*********************************//
     ctrl.saveProduct = function() {
-      console.log(ctrl.productBean);
 
+      console.log(ctrl.productBean);
+      var res1 = JSON.stringify(ctrl.productBean.specificationsMap);
+      var res = res1.replace(/"|{|}/gi, function myFunction(x) { return ''; });
+      ctrl.productBean.specifications = res + ",";
+      console.log("ctrl.productBean");
+      console.log(ctrl.productBean);
       if (ctrl.productBean.sizeColorMaps.length > 0 && ctrl.productBean.categoryId != null && ctrl.productBean.name != null && ctrl.productBean.imgurl != null && ctrl.productBean.categoryId != null && ctrl.productBean.vendorId != null) {
+        
         console.log(JSON.stringify(ctrl.productBean));
         AdminServ.saveProduct(ctrl.productBean)
           .success(function(data) {

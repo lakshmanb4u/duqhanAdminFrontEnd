@@ -35,6 +35,34 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: vendor
       });
     },
+    addColor: function(name) {
+      bean ={};
+      bean.name = name;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/save-color',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
+    },
+    addSizeGroup: function(name) {
+      bean ={};
+      bean.name = name;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/save-sizegroup',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
+    },
+    addSize: function(sizeDto) {
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/save-size',
+        headers: { 'Content-Type': 'application/json' },
+        data: sizeDto
+      });
+    },
     getProducts: function(start, limit) {
       var bean = {};
       bean.start = start;

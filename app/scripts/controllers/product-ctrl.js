@@ -58,6 +58,7 @@
       ctrl.product.specificationsMap[ctrl.newSpecification] = ctrl.newSpecificationValue;
       ctrl.newSpecification = '';
       ctrl.newSpecificationValue = '';
+      console.log(ctrl.product.specificationsMap);
     };
 
     //********************Remove Specification******************//
@@ -125,10 +126,10 @@
     ctrl.getVendor = function(clicked) {
       AdminServ.getVendor()
         .success(function(data) {
-          ctrl.vendor = data.vendorDtos;
-          console.log(ctrl.vendor);
+          ctrl.vendors = data.vendorDtos;
+          console.log(ctrl.vendors);
           if (!clicked) {
-            angular.forEach(ctrl.vendor, function(item, key) {
+            angular.forEach(ctrl.vendors, function(item, key) {
               if (item.userId == ctrl.product.vendorId) {
                 console.log(item);
                 ctrl.Vendoritemselected(item);
