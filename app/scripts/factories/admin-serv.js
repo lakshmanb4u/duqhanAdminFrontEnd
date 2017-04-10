@@ -212,6 +212,41 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         headers: { 'Content-Type': 'application/json' },
         data: bean
       });
+    },getTempProductsInventory: function(id) {
+      var bean = {};
+      bean.productId = id;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/get-temp-product-inventory',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
+    },
+    updateTempProduct: function(product) {
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/update-temp-product-details',
+        headers: { 'Content-Type': 'application/json' },
+        data: product
+      });
+    },
+    updateTempProductInventory: function(productBean) {
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/update-temp-product-inventory',
+        headers: { 'Content-Type': 'application/json' },
+        data: productBean
+      });
+    },commitTempProduct: function(productId) {
+      var bean = {};
+      bean.productId = productId;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/commit-product',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
     }
+
   };
 }
