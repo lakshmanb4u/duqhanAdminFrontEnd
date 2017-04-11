@@ -1,336 +1,293 @@
 <div class="row">
-    <div class="col-lg-6">
-        <div class="hpanel hgreen" ng-repeat="product in ctrl.products" ng-click="ctrl.showProduct(product)">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-4 project-info">
-                        <img class="img-responsive" src="{{product.imgurl}}" alt="">
-                    </div>
-                    <div class="col-sm-8">
-                        <h4 class="text-capitalize"><a sref="">{{product.name}}</a></h4>
-                        <p>{{product.description}}</p>
-                        <p><span class="label label-success">{{product.categoryName}}</span></p>
-
-                        <!--<button class="btn btn-info" type="button" ui-sref="product({product: product})"><i class="fa fa-pencil-square-o"></i> Edit</button>
-            
-                            <button class="btn btn-warning2" type="button"><i class="fa fa-clone"></i> Inventory</button>-->
-
-                    </div>
-                    <!--<div class="col-sm-3">
-                          <div class="table-responsive">
-                            <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
-                              <tbody>
-                                <tr>
-                                  <th>Original Price</th>
-                                  <td><i class="fa fa-inr"></i> {{product.price}}</td>
-                                </tr>
-                                <tr>
-                                  <th>Selling Price</th>
-                                  <td><i class="fa fa-inr"></i> {{product.discountedPrice}}</td>
-                                </tr>
-                                <tr>
-                                  <th>Discount</th>
-                                  <td>{{product.discountPCT}}%</td>
-                                </tr>
-                                <tr>
-                                  <th>Availability</th>
-                                  <td>{{product.available}}</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>-->
-                </div>
-            </div>
+  <div class="col-lg-12" ng-repeat="product in ctrl.products" ng-click="ctrl.showProduct(product)">
+    <div class="hpanel filter-item" style="cursor: pointer">
+      <div class="panel-body">
+        <div class="pull-right text-right">
+          <img class="img-responsive" src="{{product.imgurl}}" alt="" width="100px">
         </div>
+        <h4 class="m-b-xs text-capitalize">{{product.name}}</h4>
+        <p class="small">{{product.description}}</p>
+        <p><span class="label label-success">{{product.categoryName}}</span></p>
+      </div>
     </div>
-    <div class="col-lg-6" ng-show="ctrl.product">
-        <form method="get" class="form-horizontal">
-            <div class="hpanel">
-                <div class="panel-heading hbuilt">
-                    <div panel-tools-fullscreen></div>
-                    Product Details
+    <div uib-collapse="!product.isCollapsed">
+      <form class="form-horizontal">
+        <div class="hpanel hgreen" style="margin-bottom: 0;">
+          <div class="panel-heading hbuilt">
+            <div panel-tools></div>
+            Product Details
+          </div>
+          <div class="panel-body">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-8">
+                  <input type="text" placeholder="Product Name" class="form-control" ng-model="ctrl.product.name">
                 </div>
-                <div class="panel-body">
-                    <div class="col-lg-12">
-                        <div class="hpanel hgreen">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Name</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" placeholder="Product Name" class="form-control" ng-model="ctrl.product.name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Description</label>
-                                    <div class="col-sm-8">
-                                        <textarea class="form-control" rows="4" id="comment" ng-model="ctrl.product.description"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Shipping Time (Days)</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" placeholder="Shipping Time (Days)" class="form-control" ng-model="ctrl.product.shippingTime">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Shipping Cost (Rs)</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" placeholder="Shipping Cost (Rs)" class="form-control" ng-model="ctrl.product.shippingRate">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">External Link</label>
-                                    <div class="col-sm-8">
-                                        <div class="input-group">
-                                            <input type="text" placeholder="External Link" class="form-control" ng-model="ctrl.product.externalLink">
-                                            <span class="input-group-btn"> 
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Description</label>
+                <div class="col-sm-8">
+                  <textarea class="form-control" rows="4" id="comment" ng-model="ctrl.product.description"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Shipping Time (Days)</label>
+                <div class="col-sm-8">
+                  <input type="text" placeholder="Shipping Time (Days)" class="form-control" ng-model="ctrl.product.shippingTime">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Shipping Cost (Rs)</label>
+                <div class="col-sm-8">
+                  <input type="number" placeholder="Shipping Cost (Rs)" class="form-control" ng-model="ctrl.product.shippingRate">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">External Link</label>
+                <div class="col-sm-8">
+                  <div class="input-group">
+                    <input type="text" placeholder="External Link" class="form-control" ng-model="ctrl.product.externalLink">
+                    <span class="input-group-btn"> 
                                                 <button type="button" class="btn btn-info btn-outline">Select all</button> 
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Category</label>
-                                    <div class="col-sm-4">
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown" ng-click="ctrl.getCategory(true)">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Category</label>
+                <div class="col-sm-4">
+                  <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown" ng-click="ctrl.getCategory(true)">
                                                 {{ctrl.selectedItem}}
                                                 <span class="caret"></span>
                                             </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li ng-repeat="a in ctrl.category"><a ng-click="ctrl.categoryitemselected(a)">{{a.categoryName}}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-outline btn-info text-uppercase" data-toggle="modal" data-target="#categoryModal">Add New</button>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Vendor</label>
-                                    <div class="col-sm-4">
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown" ng-click="ctrl.getVendor(true)">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li ng-repeat="a in ctrl.category"><a ng-click="ctrl.categoryitemselected(a)">{{a.categoryName}}</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <button type="button" class="btn btn-outline btn-info text-uppercase" data-toggle="modal" data-target="#categoryModal">Add New</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Vendor</label>
+                <div class="col-sm-4">
+                  <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle btn-block" type="button" data-toggle="dropdown" ng-click="ctrl.getVendor(true)">
                                                 {{ctrl.selectedvendor}}
                                                 <span class="caret"></span></button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <li ng-repeat="vendr in ctrl.vendors"><a ng-click="ctrl.Vendoritemselected(vendr)">{{vendr.contactName}}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <button type="button" class="btn btn-info btn-outline text-uppercase" data-toggle="modal" data-target="#vendorModal">Add New</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <li ng-repeat="vendr in ctrl.vendors"><a ng-click="ctrl.Vendoritemselected(vendr)">{{vendr.contactName}}</a></li>
+                    </ul>
+                  </div>
                 </div>
+                <div class="col-sm-4">
+                  <button type="button" class="btn btn-info btn-outline text-uppercase" data-toggle="modal" data-target="#vendorModal">Add New</button>
+                </div>
+              </div>
             </div>
-            <div class="hpanel">
-                <div class="panel-heading hbuilt">
-                    <div panel-tools-fullscreen></div>
-                    Specifications
-                </div>
+          </div>
+        </div>
+        <div class="hpanel" style="margin-bottom: 0;">
+          <div class="panel-heading hbuilt">
+            <div panel-tools></div>
+            Specifications
+          </div>
+          <div class="panel-body">
+            <div class="col-lg-12">
+              <h5>Specifications</h5>
+              <div class="table-responsive">
+                <table cellpadding="1" cellspacing="1" class="table table-condensed table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input type="text" placeholder="Specification" class="form-control no-borders no-background" ng-model="ctrl.newSpecification">
+                      </td>
+                      <td>
+                        <input type="text" placeholder="Value" class="form-control no-borders no-background" ng-model="ctrl.newSpecificationValue">
+                      </td>
+                      <td class="text-center"><button type="button" class="btn btn-info" ng-click="ctrl.addNewSpecification()"><i class="fa fa-plus"></i></button></td>
+                    </tr>
+                    <tr ng-repeat="(key, value) in ctrl.product.specificationsMap">
+                      <td>{{key}}</td>
+                      <td>{{value}}</td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-outline" ng-click="ctrl.removeSpecification(key)"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hpanel" style="margin-bottom: 0;">
+          <div class="panel-heading hbuilt">
+            <div panel-tools></div>
+            Images
+          </div>
+          <div class="panel-body">
+            <div class="col-lg-3">
+              <div class="hpanel hblue">
                 <div class="panel-body">
-                    <div class="col-lg-12">
-                        <h5>Specifications</h5>
-                        <div class="table-responsive">
-                            <table cellpadding="1" cellspacing="1" class="table table-condensed table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" placeholder="Specification" class="form-control no-borders no-background" ng-model="ctrl.newSpecification">
-                                        </td>
-                                        <td>
-                                            <input type="text" placeholder="Value" class="form-control no-borders no-background" ng-model="ctrl.newSpecificationValue">
-                                        </td>
-                                        <td class="text-center"><button type="button" class="btn btn-info" ng-click="ctrl.addNewSpecification()"><i class="fa fa-plus"></i></button></td>
-                                    </tr>
-                                    <tr ng-repeat="(key, value) in ctrl.product.specificationsMap">
-                                        <td>{{key}}</td>
-                                        <td>{{value}}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-danger btn-outline" ng-click="ctrl.removeSpecification(key)"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                  <img src="{{ctrl.product.imgurl|| 'images/default.jpg'}}" class="img-responsive" />
                 </div>
+                <div class="panel-footer clearfix">
+                  <h5 class="pull-left">Thumbnail</h5>
+                  <div ngf-select ng-model="ctrl.thumbnail" class="btn btn-info btn-outline btn-sm pull-right" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
+                    <i class="fa fa-upload"></i>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="hpanel">
-                <div class="panel-heading hbuilt">
-                    <div panel-tools-fullscreen></div>
-                    Images
-                </div>
+            <div class="col-lg-3" ng-repeat="img in ctrl.product.imageDtos">
+              <div class="hpanel hblue">
                 <div class="panel-body">
-                    <div class="col-lg-6">
-                        <div class="hpanel hblue">
-                            <div class="panel-body">
-                                <img src="{{ctrl.product.imgurl|| 'images/default.jpg'}}" class="img-responsive" />
-                            </div>
-                            <div class="panel-footer clearfix">
-                                <h5 class="pull-left">Thumbnail</h5>
-                                <div ngf-select ng-model="ctrl.thumbnail" class="btn btn-info btn-outline btn-sm pull-right" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
-                                    <i class="fa fa-upload"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" ng-repeat="img in ctrl.product.imageDtos">
-                        <div class="hpanel hblue">
-                            <div class="panel-body">
-                                <img src="{{img.imgUrl}}" class="img-responsive" />
-                            </div>
-                            <div class="panel-footer">
-                                <div ngf-select ng-model="ctrl.thumbnail" class="btn btn-info btn-outline btn-sm" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
-                                    <i class="fa fa-upload"></i>
-                                </div>
-                                <button class="btn btn-danger btn-outline btn-sm pull-right" type="button" ng-click="ctrl.removeThumbnail()"><i class="fa fa-trash-o"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="hpanel hblue">
-                            <div class="panel-body">
-                                <cl-image public-id="{{'default_oxzqjw'}}" class="img-responsive" format="jpg">
-                                    <cl-transformation crop="thumb" gravity="center" />
-                                </cl-image>
-                            </div>
-                            <div class="panel-footer clearfix">
-                                <h5 class="pull-left">Upload Gallery Image</h5>
-                                <div ngf-select ng-model="ctrl.galleryImage" class="btn btn-info btn-outline btn-sm pull-right" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
-                                    <i class="fa fa-upload"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <img src="{{img.imgUrl}}" class="img-responsive" />
                 </div>
+                <div class="panel-footer">
+                  <div ngf-select ng-model="ctrl.thumbnail" class="btn btn-info btn-outline btn-sm" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
+                    <i class="fa fa-upload"></i>
+                  </div>
+                  <button class="btn btn-danger btn-outline btn-sm pull-right" type="button" ng-click="ctrl.removeThumbnail()"><i class="fa fa-trash-o"></i></button>
+                </div>
+              </div>
             </div>
-            <div class="hpanel">
-                <div class="panel-heading hbuilt">
-
-                </div>
+            <div class="col-lg-3">
+              <div class="hpanel hblue">
                 <div class="panel-body">
-                    <button class="btn btn-info" ng-click="ctrl.commitTempProduct()">Commit</button>
-                    <button class="btn btn-info pull-right" ng-click="ctrl.updateTempProduct()">Save changes</button>
+                  <cl-image public-id="{{'default_oxzqjw'}}" class="img-responsive" format="jpg">
+                    <cl-transformation crop="thumb" gravity="center" />
+                  </cl-image>
                 </div>
+                <div class="panel-footer clearfix">
+                  <h5 class="pull-left">Upload Gallery Image</h5>
+                  <div ngf-select ng-model="ctrl.galleryImage" class="btn btn-info btn-outline btn-sm pull-right" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
+                    <i class="fa fa-upload"></i>
+                  </div>
+                </div>
+              </div>
             </div>
-        </form>
+          </div>
+        </div>
+        <div class="hpanel" style="margin-bottom: 0;">
+          <div class="panel-body">
+            <button class="btn btn-info" ng-click="ctrl.commitTempProduct()">Commit</button>
+            <button class="btn btn-info pull-right" ng-click="ctrl.updateTempProduct()">Save changes</button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
 <!-- Modal -->
 <!--Add Category modal-->
-<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" 
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" 
-                        data-dismiss="modal">
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title text-center" id="myModalLabel">
-                    Add Category
-                </h4>
-            </div>
+        <h4 class="modal-title text-center" id="myModalLabel">
+          Add Category
+        </h4>
+      </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Category Name</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Category Name" required="" ng-model="ctrl.categoryDto.categoryName"/>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Category Parent</label>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.PgetCategory()">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Category Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Category Name" required="" ng-model="ctrl.categoryDto.categoryName" />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Category Parent</label>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" ng-click="ctrl.PgetCategory()">
                             {{ctrl.PselectedItem}}
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu5">
-                            <li ng-repeat="a in ctrl.Pcategory"><a ng-click="ctrl.Pcategoryitemselected(a)">{{a.categoryName}}</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="ctrl.saveCategory()" data-dismiss="modal">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu5">
+              <li ng-repeat="a in ctrl.Pcategory"><a ng-click="ctrl.Pcategoryitemselected(a)">{{a.categoryName}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="ctrl.saveCategory()" data-dismiss="modal">
                     Save
                 </button>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!--Add Category modal-->
 
 <!--Add vendor modal-->
 <div class="modal fade" id="vendorModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- <form class="form-horizontal" name="ctrl.vendor" ng-submit="ctrl.addVendorSubmit()"> -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add Vendor</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="contactName " type="text" placeholder="Vendor Name" required="" ng-model="ctrl.vendor.contactName">
-                </div>
+  <div class="modal-dialog">
+    <!-- <form class="form-horizontal" name="ctrl.vendor" ng-submit="ctrl.addVendorSubmit()"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Vendor</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="contactName " type="text" placeholder="Vendor Name" required="" ng-model="ctrl.vendor.contactName">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="streetOne" type="text" placeholder="Street" required="" ng-model="ctrl.vendor.streetOne">
-                </div>
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="streetOne" type="text" placeholder="Street" required="" ng-model="ctrl.vendor.streetOne">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="streetTwo" type="text" placeholder="Street (Optional)" ng-model="ctrl.vendor.streetTwo">
-                </div>
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="streetTwo" type="text" placeholder="Street (Optional)" ng-model="ctrl.vendor.streetTwo">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="city" type="text" placeholder="City" required="" ng-model="ctrl.vendor.city">
-                </div>
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="city" type="text" placeholder="City" required="" ng-model="ctrl.vendor.city">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="state" type="text" placeholder="State" required="" ng-model="ctrl.vendor.state">
-                </div>
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="state" type="text" placeholder="State" required="" ng-model="ctrl.vendor.state">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="country" type="text" placeholder="Country" required="" ng-model="ctrl.vendor.country">
-                </div>
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="country" type="text" placeholder="Country" required="" ng-model="ctrl.vendor.country">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="zipCode" type="text" placeholder="Zip" required="" ng-model="ctrl.vendor.zipCode">
-                </div>
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="zipCode" type="text" placeholder="Zip" required="" ng-model="ctrl.vendor.zipCode">
+        </div>
 
-                <div class="form-group has-success has-feedback">
-                    <input class="form-control" name="phone" type="text" placeholder="Phone" required="" ng-model="ctrl.vendor.phone">
-                </div>
-                <div class="row">
-                    <div class="col-sm-9"></div>
-                    <div class="col-sm-3">
-                        <span class="pull-right">
+        <div class="form-group has-success has-feedback">
+          <input class="form-control" name="phone" type="text" placeholder="Phone" required="" ng-model="ctrl.vendor.phone">
+        </div>
+        <div class="row">
+          <div class="col-sm-9"></div>
+          <div class="col-sm-3">
+            <span class="pull-right">
                             <button type="submit" id="addVendorSubmit" class="btn btn-primary" ng-click="ctrl.addVendorSubmit()" data-dismiss="modal">Save</button>
                         </span>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <!-- </form> -->
+      </div>
     </div>
+    <!-- </form> -->
+  </div>
 </div>
 
 <!--Add vendor modal-->

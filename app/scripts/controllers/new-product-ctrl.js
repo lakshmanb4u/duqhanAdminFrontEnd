@@ -12,7 +12,7 @@
     ctrl.selectedItem = 'Select Category';
     ctrl.selectedvendor = 'Select Vendor';
     ctrl.PselectedItem = 'Select Parent Category';
-    ctrl.SizeGrupselectedItem = 'Select size';
+    ctrl.SizeGrupselectedItem = 'Select Size Group';
     ctrl.selectedColor = 'Select Color';
     ctrl.selectedspecifications = null;
     ctrl.selectedspecificationValue = null;
@@ -88,45 +88,45 @@
 
     //***********************************Specifications block*******************************//
 
-   /* ctrl.specificationValueSelected = function(value) {
-      ctrl.selectedspecificationValue = value;
-    };
+    /* ctrl.specificationValueSelected = function(value) {
+       ctrl.selectedspecificationValue = value;
+     };
 
-    ctrl.specificationsSelect = function(id, value) {
-      ctrl.selectedspecifications = value;
-      ctrl.specificationDto1.id = id;
-      AdminServ.getSpecificationsValue(id)
-        .success(function(data) {
-          ctrl.specificationValue = data.values;
-          console.log(ctrl.specifications);
-        })
-        .error(function(error) {
-          console.log('Unable to load subject data');
-        });
-    };
-    ctrl.getSpecifications = function() {
-      ctrl.selectedspecifications = null;
-      ctrl.selectedspecificationValue = null;
-      if (ctrl.productBean.categoryId != null) {
-        AdminServ.getSpecifications(ctrl.productBean.categoryId)
-          .success(function(data) {
-            ctrl.specifications = data.specifications;
-            console.log(ctrl.specifications);
-          })
-          .error(function(error) {
-            console.log('Unable to load subject data');
-          });
-      }
-    };
-    ctrl.addSpecifications = function() {
-      if (ctrl.selectedspecifications != null && ctrl.selectedspecificationValue != null) {
-        if (ctrl.productBean.specifications != null) {
-          ctrl.productBean.specifications = ctrl.productBean.specifications + ctrl.selectedspecifications + ":" + ctrl.selectedspecificationValue + ",";
-        } else {
-          ctrl.productBean.specifications = ctrl.selectedspecifications + ":" + ctrl.selectedspecificationValue + ",";
-        }
-      }
-    };*/
+     ctrl.specificationsSelect = function(id, value) {
+       ctrl.selectedspecifications = value;
+       ctrl.specificationDto1.id = id;
+       AdminServ.getSpecificationsValue(id)
+         .success(function(data) {
+           ctrl.specificationValue = data.values;
+           console.log(ctrl.specifications);
+         })
+         .error(function(error) {
+           console.log('Unable to load subject data');
+         });
+     };
+     ctrl.getSpecifications = function() {
+       ctrl.selectedspecifications = null;
+       ctrl.selectedspecificationValue = null;
+       if (ctrl.productBean.categoryId != null) {
+         AdminServ.getSpecifications(ctrl.productBean.categoryId)
+           .success(function(data) {
+             ctrl.specifications = data.specifications;
+             console.log(ctrl.specifications);
+           })
+           .error(function(error) {
+             console.log('Unable to load subject data');
+           });
+       }
+     };
+     ctrl.addSpecifications = function() {
+       if (ctrl.selectedspecifications != null && ctrl.selectedspecificationValue != null) {
+         if (ctrl.productBean.specifications != null) {
+           ctrl.productBean.specifications = ctrl.productBean.specifications + ctrl.selectedspecifications + ":" + ctrl.selectedspecificationValue + ",";
+         } else {
+           ctrl.productBean.specifications = ctrl.selectedspecifications + ":" + ctrl.selectedspecificationValue + ",";
+         }
+       }
+     };*/
 
     //********************Add new Specification******************//
     ctrl.addNewSpecification = function() {
@@ -196,9 +196,9 @@
     };
 
     ctrl.sizeGroupName = null;
-    ctrl.saveSizeGroup = function(){
-      if(ctrl.sizeGroupName){
-        AdminServ.addSizeGroup(ctrl.sizeGroupName).success(function(data){ctrl.sizeGroupName = null;}).error(function(error){});
+    ctrl.saveSizeGroup = function() {
+      if (ctrl.sizeGroupName) {
+        AdminServ.addSizeGroup(ctrl.sizeGroupName).success(function(data) { ctrl.sizeGroupName = null; }).error(function(error) {});
       }
     };
 
@@ -206,16 +206,16 @@
       sizeGroupId: '',
       sizeText: ''
     };
-    ctrl.saveSize = function(){
-      if(ctrl.sizeDto.sizeGroupId && ctrl.sizeDto.sizeText){
+    ctrl.saveSize = function() {
+      if (ctrl.sizeDto.sizeGroupId && ctrl.sizeDto.sizeText) {
         AdminServ.addSize(ctrl.sizeDto)
-        .success(function(data){
-          ctrl.sizeDto = {
-          sizeGroupId: '',
-          sizeText: ''
-          };
-        })
-        .error(function(error){});
+          .success(function(data) {
+            ctrl.sizeDto = {
+              sizeGroupId: '',
+              sizeText: ''
+            };
+          })
+          .error(function(error) {});
       }
     };
 
@@ -259,9 +259,9 @@
     };
 
     ctrl.colorName = null;
-    ctrl.saveColor = function(){
-      if(ctrl.colorName){
-        AdminServ.addColor(ctrl.colorName).success(function(data){ctrl.colorName = null;}).error(function(error){});
+    ctrl.saveColor = function() {
+      if (ctrl.colorName) {
+        AdminServ.addColor(ctrl.colorName).success(function(data) { ctrl.colorName = null; }).error(function(error) {});
       }
     };
 
@@ -476,7 +476,7 @@
 
     ctrl.removeThumbnail = function(index) {
       // ctrl.productBean.imgurl = null;
-      ctrl.productBean.imageDtos.splice(index,1);
+      ctrl.productBean.imageDtos.splice(index, 1);
     };
 
     //************************************Save producr*********************************//
@@ -489,7 +489,7 @@
       console.log("ctrl.productBean");
       console.log(ctrl.productBean);
       if (ctrl.productBean.sizeColorMaps.length > 0 && ctrl.productBean.categoryId != null && ctrl.productBean.name != null && ctrl.productBean.imgurl != null && ctrl.productBean.categoryId != null && ctrl.productBean.vendorId != null) {
-        
+
         console.log(JSON.stringify(ctrl.productBean));
         AdminServ.saveProduct(ctrl.productBean)
           .success(function(data) {

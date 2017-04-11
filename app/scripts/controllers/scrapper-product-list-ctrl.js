@@ -6,7 +6,7 @@
 
   ScrapperProductListCtrl.$inject = ['$scope', 'AdminServ'];
 
-  function ScrapperProductListCtrl( $scope, AdminServ) {
+  function ScrapperProductListCtrl($scope, AdminServ) {
     //***********************On Load***************************//
     var ctrl = this;
     ctrl.listURL = '';
@@ -18,6 +18,9 @@
         .success(function(response) {
           console.log(response);
           ctrl.products = response.products;
+          // angular.forEach(ctrl.products, function(product, key) {
+          //   product.isCollapsed = true;
+          // });
         })
         .error(function(error) {
           console.log('!Error');
@@ -26,22 +29,23 @@
     ctrl.loadCrawledProducts();
 
     ctrl.showProduct = function(product) {
+      product.isCollapsed = !product.isCollapsed
       ctrl.product = product;
       AdminServ.getTempProductsInventory(ctrl.product.productId)
-      .success(function(data) {
-        console.log('Product Inventory =====================');
-        console.log(data);
-        ctrl.inventory = data;
-        ctrl.product.sizeColorMaps = data.sizeColorMaps;
-        ctrl.product.imageDtos = data.imageDtos;
-        ctrl.getVendor(false);
-        ctrl.getCategory(false);
-        console.log(ctrl.product.imageDtos);
-      })
-      .error(function(error) {});
+        .success(function(data) {
+          console.log('Product Inventory =====================');
+          console.log(data);
+          ctrl.inventory = data;
+          ctrl.product.sizeColorMaps = data.sizeColorMaps;
+          ctrl.product.imageDtos = data.imageDtos;
+          ctrl.getVendor(false);
+          ctrl.getCategory(false);
+          console.log(ctrl.product.imageDtos);
+        })
+        .error(function(error) {});
 
 
-      
+
       console.log(ctrl.product);
       $('div.hpanel').removeClass('hide');
     }
@@ -89,7 +93,7 @@
         });
     };
 
-    
+
 
     ctrl.categoryDto = {};
     ctrl.categoryDto.categoryName = null;
@@ -158,7 +162,7 @@
           console.log('!Error');
         });
     };
-    
+
     //********************Add new Specification******************//
     ctrl.addNewSpecification = function() {
       ctrl.product.specificationsMap[ctrl.newSpecification] = ctrl.newSpecificationValue;
@@ -225,7 +229,7 @@
 
     ctrl.removeThumbnail = function(index) {
       // ctrl.productBean.imgurl = null;
-      ctrl.product.imageDtos.splice(index,1);
+      ctrl.product.imageDtos.splice(index, 1);
     };
 
     //******************Update product*************************//
@@ -257,7 +261,7 @@
 
     //******************Commit product*************************//
     ctrl.commitTempProduct = function() {
-      if(ctrl.product.productId != null){
+      if (ctrl.product.productId != null) {
         console.log("ctrl.product.productId");
         console.log(ctrl.product);
         $('.loader').show();
@@ -271,7 +275,7 @@
           .error(function(error) {
             $('.loader').hide();
           });
-        }
+      }
     };
 
 

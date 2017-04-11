@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="hpanel">
       <div class="panel-heading hbuilt">
         List of all the products in the aliexpress.com Page
@@ -9,12 +9,29 @@
       </div>
       <div class="panel-body">
 
-        <div class="btn-group btn-block m-b" ng-repeat="product in ctrl.productLinks">
+        <div class="btn-group btn-block m-b" ng-repeat="product in ctrl.productLinks" ng-show="ctrl.displayOption == 1 || (ctrl.displayOption == 2 && product.status == 1) || (ctrl.displayOption == 3 && product.status == 0)">
           <a href="{{product.statusCode}}" class="btn" ng-class="{'btn-info':product.status == 0, 'btn-success':product.status == 1}" target="_blank"><i class="fa fa-external-link"></i></a>
           <a href="{{product.statusCode}}" class="btn btn-default" target="_blank" style="width: calc(100% - 130px); text-overflow: ellipsis; overflow: hidden;">{{product.statusCode}}</a>
           <button class="btn btn-info ladda-button" type="button" id="ladda-button-crawl-{{product.id}}" data-style="expand-right" ng-click="ctrl.scrapProduct(product, $index)" ng-show="product.status == 0"><i class="fa fa-cloud-download"></i></button>
           <button class="btn btn-success" type="button" ng-show="product.status == 1" ui-sref="scrapper.productlist"><i class="fa fa-check-square-o"></i></button>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="hpanel">
+      <div class="panel-heading hbuilt">
+        Quick Links
+      </div>
+      <div class="panel-body">
+        <div ng-repeat="choice in ctrl.displayOptions">
+          <label><input icheck type="radio" name="displayOptions" ng-model="ctrl.displayOption" value="{{choice.id}}"> {{choice.text}} </label>
+        </div>
+        <hr/>
+        <button class="btn btn-outline btn-block" ng-class="{'btn-info':ctrl.disabledCrawl10 == false, 'btn-default':ctrl.disabledCrawl10 == true}" type="button" ng-click="ctrl.scrapProducts(10)" ng-disabled="ctrl.disabledCrawl10"><i class="fa cloud-download"></i> Crawl 10 Products</button>
+        <button class="btn btn-outline btn-block" ng-class="{'btn-info':ctrl.disabledCrawl50 == false, 'btn-default':ctrl.disabledCrawl50 == true}" type="button" ng-click="ctrl.scrapProducts(50)" ng-disabled="ctrl.disabledCrawl50"><i class="fa cloud-download"></i> Crawl 50 Products</button>
+        <button class="btn btn-outline btn-block" ng-class="{'btn-info':ctrl.disabledCrawl100 == false, 'btn-default':ctrl.disabledCrawl100 == true}" type="button" ng-click="ctrl.scrapProducts(100)" ng-disabled="ctrl.disabledCrawl100"><i class="fa cloud-download"></i> Crawl 100 Products</button>
+        <button class="btn btn-info btn-outline btn-block" type="button" ng-click="ctrl.scrapProducts()"><i class="fa cloud-download"></i> Crawl All Products</button>
       </div>
     </div>
   </div>
