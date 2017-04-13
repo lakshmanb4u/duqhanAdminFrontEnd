@@ -99,20 +99,35 @@
       AdminServ.scrapProduct(products)
         .success(function(response) {
           console.log(response);
-          if (response.status == 'failure') {
-            ctrl.status = 'danger';
-            ctrl.statusMsg = 'Unable to crawl products from aliexpress.com';
-          } else {
-            ctrl.status = 'success';
-            ctrl.statusMsg = 'Successfully crawled products from aliexpress.com';
-            angular.forEach(ctrl.productLinks, function(productLink, key) {
-              angular.forEach(products, function(product, key) {
-                if (productLink.id == product.id) {
+          ctrl.status = 'success';
+          ctrl.statusMsg = 'Successfully crawled products from aliexpress.com';
+          angular.forEach(ctrl.productLinks, function(productLink, key) {
+            angular.forEach(response.statusBeans, function(product, key) {
+              if (productLink.id == product.id) {
+                if (product.status == 'success') {
                   productLink.status = 1;
-                }
-              });
+                } else if (product.status == 'criteria mismatch') {
+                  productLink.status = 2;
+                }                
+              }
             });
-          }
+          });
+
+
+          // if (response.status == 'failure') {
+          //   ctrl.status = 'danger';
+          //   ctrl.statusMsg = 'Unable to crawl products from aliexpress.com';
+          // } else {
+          //   ctrl.status = 'success';
+          //   ctrl.statusMsg = 'Successfully crawled products from aliexpress.com';
+          //   angular.forEach(ctrl.productLinks, function(productLink, key) {
+          //     angular.forEach(products, function(product, key) {
+          //       if (productLink.id == product.id) {
+          //         productLink.status = 1;
+          //       }
+          //     });
+          //   });
+          // }
           $.ladda('stopAll');
           ctrl.updateCrawlBtnStatus();
         })

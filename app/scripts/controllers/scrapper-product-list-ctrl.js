@@ -13,14 +13,18 @@
     ctrl.processing = 0;
     ctrl.product = null;
 
+    ctrl.updateCrawlBtnStatus = function() {
+      ctrl.disabledCrawl10 = ctrl.products.length < 10;
+      ctrl.disabledCrawl50 = ctrl.products.length < 50;
+      ctrl.disabledCrawl100 = ctrl.products.length < 100;
+    };
+
     ctrl.loadCrawledProducts = function() {
       AdminServ.loadCrawledProducts(0, 150)
         .success(function(response) {
           console.log(response);
           ctrl.products = response.products;
-          // angular.forEach(ctrl.products, function(product, key) {
-          //   product.isCollapsed = true;
-          // });
+          ctrl.updateCrawlBtnStatus();
         })
         .error(function(error) {
           console.log('!Error');
@@ -35,6 +39,7 @@
         .success(function(data) {
           console.log('Product Inventory =====================');
           console.log(data);
+          ctrl.productInventory = data.sizeColorMaps;
           ctrl.inventory = data;
           ctrl.product.sizeColorMaps = data.sizeColorMaps;
           ctrl.product.imageDtos = data.imageDtos;
@@ -48,14 +53,81 @@
 
       console.log(ctrl.product);
       $('div.hpanel').removeClass('hide');
+    };
+
+    //********************************Add new product in inventory list******************//
+    ctrl.newInventory = {
+      discount: 0,
+      mapId: null,
+      colorId: null,
+      colorText: null,
+      count: 1,
+      orginalPrice: 0,
+      productHeight: 1,
+      productLength: 1,
+      productWeight: 1,
+      productWidth: 1,
+      salesPrice: 0,
+      sizeId: null,
+      sizeText: null
+    };
+
+    ctrl.addNewProduct = function() {
+      console.log(ctrl.productInventory);
+      ctrl.productInventory.push(ctrl.newInventory);
+    };
+
+    //***********************************Size block*******************************//
+    ctrl.thisSizeSelected = function(siz, map) {
+      map.sizeText = siz.sizeText;
+      map.sizeId = siz.sizeId;
+    };
+
+    ctrl.SizeSelected = function(item3) {
+      ctrl.selectedSize = item3.sizeText;
+      ctrl.newInventory.sizeText = item3.sizeText;
+      ctrl.newInventory.sizeId = item3.sizeId;
     }
+    ctrl.getSize = function() {
+      AdminServ.getSize()
+        .success(function(data) {
+          ctrl.size = data.sizeDtos;
+          console.log(ctrl.size);
+        })
+        .error(function(error) {
+          console.log('Unable to load subject data');
+        });
+    };
+    ctrl.getSize();
+
+    //***********************************Color block*******************************//
+    ctrl.thisColorSelected = function(color, map) {
+      map.colorText = color.colorText;
+      map.colorId = color.colorId;
+    }
+    ctrl.ColorSelected = function(item4) {
+      ctrl.selectedColor = item4.colorText;
+      ctrl.newInventory.colorText = item4.colorText;
+      ctrl.newInventory.colorId = item4.colorId;
+    }
+    ctrl.getColor = function() {
+      AdminServ.getColor()
+        .success(function(data) {
+          ctrl.color = data.colorDtos;
+          console.log(ctrl.color);
+        })
+        .error(function(error) {
+          console.log('Unable to load subject data');
+        });
+    };
+    ctrl.getColor();
 
     //*******************For category dropdown********************//
     ctrl.Pcategoryitemselected = function(item) {
       console.log(item);
       ctrl.PselectedItem = item.categoryName;
       ctrl.categoryDto.patentId = item.categoryId;
-    }
+    };
 
     ctrl.PgetCategory = function() {
       AdminServ.getCategory()
@@ -178,6 +250,7 @@
       console.log(ctrl.product.specificationsMap);
     };
 
+
     //******************Image upload**************************//
     $scope.$watch('ctrl.thumbnail', function(newVal, oldVal) {
       if (ctrl.thumbnail != null || ctrl.thumbnail != undefined) {
@@ -262,12 +335,16 @@
     //******************Commit product*************************//
     ctrl.commitTempProduct = function() {
       if (ctrl.product.productId != null) {
-        console.log("ctrl.product.productId");
-        console.log(ctrl.product);
+        var statusBeans = [];
+        var statusBean = {};
+        statusBean.id = ctrl.product.productId;
+        statusBeans.push(statusBean);
         $('.loader').show();
-
-        AdminServ.commitTempProduct(ctrl.product.productId)
+        console.log(statusBeans);
+        AdminServ.commitTempProduct(statusBeans)
           .success(function(data) {
+
+            console.log(data);
             $('.loader').hide();
             ctrl.product = null;
             ctrl.loadCrawledProducts();
@@ -278,6 +355,29 @@
       }
     };
 
-
+    ctrl.commitTempProducts = function(n) {
+      var pendingProducts = ctrl.products;
+      if (!n) {
+        n = pendingProducts.length;
+      }
+      var products = pendingProducts.slice(0, n);
+      var statusBeans = [];
+      angular.forEach(products, function(product, key) {
+        var statusBean = {};
+        statusBean.id = product.productId;
+        statusBeans.push(statusBean);
+      });
+      $('.loader').show();
+      AdminServ.commitTempProduct(statusBeans)
+        .success(function(response) {
+          $('.loader').hide();
+            ctrl.product = null;
+            ctrl.loadCrawledProducts();
+        })
+        .error(function(error) {
+          console.log('!Error');
+          $('.loader').hide();
+        });
+    };
   }
 })();

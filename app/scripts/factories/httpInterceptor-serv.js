@@ -1,7 +1,7 @@
 angular.module('homer')
   .factory('HttpInterceptor', HttpInterceptor);
 
-function HttpInterceptor($q, $log, AUTH_TOKEN, BASE_URL_CONSTANT, $localStorage) {
+function HttpInterceptor($q, $log, AUTH_TOKEN, BASE_URL_CONSTANT, $localStorage, $injector) {
   return {
     request: function(config) {
       if (!AUTH_TOKEN) {
@@ -16,6 +16,7 @@ function HttpInterceptor($q, $log, AUTH_TOKEN, BASE_URL_CONSTANT, $localStorage)
       if (res.config.url.indexOf(BASE_URL_CONSTANT + 'web/admin-login') === 0 && res.data) {
         AUTH_TOKEN = res.data.aouthToken;
         $localStorage.token = res.data.aouthToken;
+        $localStorage.email = res.data.status;
       }
       return res;
     },
@@ -27,6 +28,10 @@ function HttpInterceptor($q, $log, AUTH_TOKEN, BASE_URL_CONSTANT, $localStorage)
     responseError: function(err) {
       // BusyLoader.hide();
       $log.log('Response error via interceptor');
+      if (err.status === 401) {
+        $injector.get('$state').transitionTo('login');
+        // $state.go('login');
+      }
       return $q.reject(err);
     }
   };

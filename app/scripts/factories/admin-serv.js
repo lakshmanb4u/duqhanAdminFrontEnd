@@ -12,6 +12,16 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: user
       });
     },
+    logout: function(email) {
+      var user = {};
+      user.email = email;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/logout',
+        headers: { 'Content-Type': 'application/json' },
+        data: user
+      });
+    },
     getCategory: function() {
       return $http.get(BASE_URL_CONSTANT + 'admin/get-category');
     },
@@ -237,9 +247,9 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         headers: { 'Content-Type': 'application/json' },
         data: productBean
       });
-    },commitTempProduct: function(productId) {
+    },commitTempProduct: function(statusBeans) {
       var bean = {};
-      bean.productId = productId;
+      bean.statusBeans = statusBeans;
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/commit-product',

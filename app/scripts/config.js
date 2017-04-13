@@ -37,6 +37,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $http
         pageTitle: 'Login',
       }
     })
+    .state('logout', {
+      url: "/logout",
+      template: "<div>logging out</div>",
+      controller: 'LogoutCtrl as ctrl',
+      data: {
+        pageTitle: 'Logout',
+      }
+    })
     .state('products', {
       url: "/products",
       templateUrl: "views/products.html",

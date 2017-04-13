@@ -10,10 +10,11 @@
       <div class="panel-body">
 
         <div class="btn-group btn-block m-b" ng-repeat="product in ctrl.productLinks" ng-show="ctrl.displayOption == 1 || (ctrl.displayOption == 2 && product.status == 1) || (ctrl.displayOption == 3 && product.status == 0)">
-          <a href="{{product.statusCode}}" class="btn" ng-class="{'btn-info':product.status == 0, 'btn-success':product.status == 1}" target="_blank"><i class="fa fa-external-link"></i></a>
+          <a href="{{product.statusCode}}" class="btn" ng-class="{'btn-info':product.status == 0, 'btn-success':product.status == 1, 'btn-danger':product.status == 2}" target="_blank"><i class="fa fa-external-link"></i></a>
           <a href="{{product.statusCode}}" class="btn btn-default" target="_blank" style="width: calc(100% - 130px); text-overflow: ellipsis; overflow: hidden;">{{product.statusCode}}</a>
           <button class="btn btn-info ladda-button" type="button" id="ladda-button-crawl-{{product.id}}" data-style="expand-right" ng-click="ctrl.scrapProduct(product, $index)" ng-show="product.status == 0"><i class="fa fa-cloud-download"></i></button>
           <button class="btn btn-success" type="button" ng-show="product.status == 1" ui-sref="scrapper.productlist"><i class="fa fa-check-square-o"></i></button>
+          <button class="btn btn-danger" type="button" ng-show="product.status == 2"><i class="fa fa-exclamation-triangle"></i></button>
         </div>
       </div>
     </div>
