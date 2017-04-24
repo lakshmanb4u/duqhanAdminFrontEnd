@@ -12,6 +12,9 @@
     ctrl.listURL = '';
     ctrl.processing = 0;
     ctrl.product = null;
+    ctrl.start = 0;
+    ctrl.itemPerPage = 10;
+    ctrl.products = [];
 
     ctrl.updateCrawlBtnStatus = function() {
       ctrl.disabledCrawl10 = ctrl.products.length < 10;
@@ -20,7 +23,25 @@
     };
 
     ctrl.loadCrawledProducts = function() {
-      AdminServ.loadCrawledProducts(0, 150)
+      $('.loader').show();
+      AdminServ.loadCrawledProducts(ctrl.start, ctrl.itemPerPage)
+        .success(function(response) {
+          console.log(response);
+          angular.extend(ctrl.products, response.products);
+          ctrl.start = ctrl.products.length;
+          ctrl.updateCrawlBtnStatus();
+          $('.loader').hide();
+        })
+        .error(function(error) {
+          console.log('!Error');
+          $('.loader').hide();
+        });
+    };
+    ctrl.loadCrawledProducts();
+
+    ctrl.loadMoreCrawledProducts = function() {
+      ctrl.start = ctrl.start + ctrl.itemPerPage;
+      AdminServ.loadCrawledProducts(0, 10)
         .success(function(response) {
           console.log(response);
           ctrl.products = response.products;
@@ -30,7 +51,6 @@
           console.log('!Error');
         });
     };
-    ctrl.loadCrawledProducts();
 
     ctrl.showProduct = function(product) {
       product.isCollapsed = !product.isCollapsed
@@ -371,8 +391,8 @@
       AdminServ.commitTempProduct(statusBeans)
         .success(function(response) {
           $('.loader').hide();
-            ctrl.product = null;
-            ctrl.loadCrawledProducts();
+          ctrl.product = null;
+          ctrl.loadCrawledProducts();
         })
         .error(function(error) {
           console.log('!Error');

@@ -2,19 +2,25 @@
   <div class="col-lg-12">
     <div class="hpanel">
       <div class="panel-body float-e-margins">
-        <p>
+        <div class="col-lg-3">
           <button class="btn btn-outline btn-block" ng-class="{'btn-info':ctrl.disabledCrawl10 == false, 'btn-default':ctrl.disabledCrawl10 == true}" type="button" ng-click="ctrl.commitTempProducts(10)" ng-disabled="ctrl.disabledCrawl10"><i class="fa cloud-download"></i> Store 10 Products</button>
+        </div>
+        <div class="col-lg-3">
           <button class="btn btn-outline btn-block" ng-class="{'btn-info':ctrl.disabledCrawl50 == false, 'btn-default':ctrl.disabledCrawl50 == true}" type="button" ng-click="ctrl.commitTempProducts(50)" ng-disabled="ctrl.disabledCrawl50"><i class="fa cloud-download"></i> Store 50 Products</button>
+        </div>
+        <div class="col-lg-3">
           <button class="btn btn-outline btn-block" ng-class="{'btn-info':ctrl.disabledCrawl100 == false, 'btn-default':ctrl.disabledCrawl100 == true}" type="button" ng-click="ctrl.commitTempProducts(100)" ng-disabled="ctrl.disabledCrawl100"><i class="fa cloud-download"></i> Store 100 Products</button>
+        </div>
+        <div class="col-lg-3">
           <button class="btn btn-info btn-outline btn-block" type="button" ng-click="ctrl.commitTempProducts()"><i class="fa cloud-download"></i> Store All Products</button>
-        </p>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12" ng-repeat="product in ctrl.products">
-    <div class="hpanel filter-item" style="cursor: pointer" ng-click="ctrl.showProduct(product)">
+    <div class="hpanel filter-item" ng-class="{'active':product.isCollapsed}" style="cursor: pointer" ng-click="ctrl.showProduct(product)">
       <div class="panel-body">
         <div class="pull-right text-right">
           <img class="img-responsive" src="{{product.imgurl}}" alt="" width="100px">
@@ -26,10 +32,10 @@
     </div>
     <div uib-collapse="!product.isCollapsed">
       <form class="form-horizontal">
-        <div class="hpanel hgreen" style="margin-bottom: 0;">
+        <div class="hpanel" style="margin-bottom: 0;">
           <div class="panel-heading hbuilt">
-            <div panel-tools></div>
-            Product Details
+            <!--<div panel-tools></div>-->
+            <h4 class="m-b-xs text-capitalize">Product Details</h4>
           </div>
           <div class="panel-body">
             <div class="col-lg-12">
@@ -106,8 +112,8 @@
         </div>
         <div class="hpanel" style="margin-bottom: 0;">
           <div class="panel-heading hbuilt">
-            <div panel-tools></div>
-            Specifications
+            <!--<div panel-tools></div>-->
+            <h4 class="m-b-xs text-capitalize">Specifications</h4>
           </div>
           <div class="panel-body">
             <div class="col-lg-12">
@@ -146,8 +152,8 @@
         </div>
         <div class="hpanel" style="margin-bottom: 0;">
           <div class="panel-heading hbuilt">
-            <div panel-tools></div>
-            Inventory
+            <!--<div panel-tools></div>-->
+            <h4 class="m-b-xs text-capitalize">Inventory</h4>
           </div>
           <div class="panel-body">
             <div class="col-lg-12">
@@ -263,8 +269,8 @@
         </div>
         <div class="hpanel" style="margin-bottom: 0;">
           <div class="panel-heading hbuilt">
-            <div panel-tools></div>
-            Images
+            <!--<div panel-tools></div>-->
+            <h4 class="m-b-xs text-capitalize">Images</h4>
           </div>
           <div class="panel-body">
             <div class="col-lg-3">
@@ -318,6 +324,11 @@
         </div>
       </form>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-2 col-xs-offset-5 m-t-md">
+    <button class="btn btn-info btn-block" type="button" ng-click="ctrl.loadCrawledProducts()"><i class="fa fa-list"></i> Load More</button>
   </div>
 </div>
 
