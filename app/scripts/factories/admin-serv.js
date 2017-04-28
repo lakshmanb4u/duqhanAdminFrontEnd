@@ -7,7 +7,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
     login: function(user) {
       return $http({
         method: 'POST',
-        url: BASE_URL_CONSTANT + 'web/admin-login',
+        url: BASE_URL_CONSTANT + 'admin-login',
         headers: { 'Content-Type': 'application/json' },
         data: user
       });

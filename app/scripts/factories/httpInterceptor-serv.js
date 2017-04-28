@@ -13,7 +13,7 @@ function HttpInterceptor($q, $log, AUTH_TOKEN, BASE_URL_CONSTANT, $localStorage,
       return config;
     },
     response: function(res) {
-      if (res.config.url.indexOf(BASE_URL_CONSTANT + 'web/admin-login') === 0 && res.data) {
+      if (res.config.url.indexOf(BASE_URL_CONSTANT + 'admin-login') === 0 && res.data) {
         AUTH_TOKEN = res.data.aouthToken;
         $localStorage.token = res.data.aouthToken;
         $localStorage.email = res.data.status;
