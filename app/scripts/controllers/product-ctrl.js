@@ -16,6 +16,7 @@
     ctrl.selectedvendor = 'Select Vendor';
     ctrl.PselectedItem = 'Select Parent Category';
 
+    $('.loader').show();
     AdminServ.getProductsInventory(ctrl.product.productId)
       .success(function(data) {
         console.log('Product Inventory =====================');
@@ -23,8 +24,11 @@
         ctrl.inventory = data;
         ctrl.product.images = data.imageDtos;
         console.log(ctrl.product.images);
+        $('.loader').hide();
       })
-      .error(function(error) {});
+      .error(function(error) {
+        $('.loader').hide();
+      });
 
     //******************Update product*************************//
     ctrl.updateProduct = function() {
@@ -33,6 +37,7 @@
       ctrl.product.specifications = res + ",";
       if (ctrl.product.categoryId != "" && ctrl.product.name != "" && ctrl.product.imgurl != "" && ctrl.product.categoryId != "" && ctrl.product.vendorId != "") {
         $('.loader').show();
+        ctrl.product.imageDtos = ctrl.product.images;
         AdminServ.updateProduct(ctrl.product)
           .success(function(data) {
             ctrl.inventory.imageDtos = ctrl.product.images;
@@ -197,10 +202,9 @@
       console.log(file);
       if (file) {
         $('.loader').show();
-        AdminServ.uploadToCloudinary(file)
+        AdminServ.uploadToGCS(file, ctrl.product.productId)
           .then(function(data) {
-            console.log(data);
-            ctrl.product.imgurl = data.url;
+            ctrl.product.imgurl = data.data.status;
             $('.loader').hide();
           })
           .catch(function(error) {
@@ -218,12 +222,12 @@
       console.log(file);
       if (file) {
         $('.loader').show();
-        AdminServ.uploadToCloudinary(file)
+        AdminServ.uploadToGCS(file, ctrl.product.productId)
           .then(function(data) {
             console.log(data);
             // ctrl.product.imgurl = data.url;
             var img = {};
-            img.imgUrl = data.url;
+            img.imgUrl = data.data.status;
             img.id = null;
             ctrl.product.images.push(img);
             $('.loader').hide();
@@ -236,8 +240,9 @@
     };
     //******************Image upload End**************************//
 
-    ctrl.removeThumbnail = function() {
-      ctrl.product.imgurl = null;
+    ctrl.removeGalleryImage = function(index) {
+      // ctrl.product.imgurl = null;
+      ctrl.product.images[index].imgUrl = null;
     };
   }
 })();

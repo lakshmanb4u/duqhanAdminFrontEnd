@@ -16,6 +16,7 @@
     ctrl.SizeGrupselectedItem = 'Select size group';
 
     // ******************get products when load view product page*********************//
+    $('.loader').show();
     AdminServ.getProductsInventory(ctrl.productId)
       .success(function(productBean) {
         ctrl.productBean = productBean;
@@ -27,8 +28,10 @@
         if (!ctrl.productInventory[0].colorText) {
           ctrl.selectedColor = 'No Color';
         }
+        $('.loader').hide();
       })
       .error(function(error) {
+        $('.loader').hide();
         console.log('Unable to load subject data');
       });
 
@@ -71,9 +74,13 @@
       }
       if ((sizeCount == 0 || sizeCount == sizeColorMaps.length) && (colorCount == 0 || colorCount == sizeColorMaps.length)) {
         console.log('hi...............');
+        $('.loader').show();
         AdminServ.updateProductInventory(ctrl.productBean)
-          .success(function(data) {})
+          .success(function(data) {
+            $('.loader').hide();
+          })
           .error(function(error) {
+            $('.loader').hide();
             console.log('Unable to load subject data');
           });
       }

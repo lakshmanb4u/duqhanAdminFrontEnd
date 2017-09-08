@@ -75,5 +75,16 @@
         </div>
       </div>
     </div>
+    <div class="row projects">
+      <div class="col-xs-6">
+         <button class="btn btn-info" type="button" ng-click="ctrl.goToTop()">Go to top</button> 
+      </div>
+      <div class="col-xs-6">
+        <div class="pull-right">
+          <button class="btn btn-info" type="button" ng-click="ctrl.getPreviousProduct()" ng-hide="ctrl.isPrevHide">Privious</button>
+          <button class="btn btn-info" type="button" ng-click="ctrl.getMoreProduct()" ng-hide="ctrl.isNextHide">Next</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

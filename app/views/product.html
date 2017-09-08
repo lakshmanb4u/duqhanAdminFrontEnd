@@ -1,10 +1,12 @@
-<!-- Header -->
+<!-- Header start -->
 <div id="header" ng-include="'views/common/header.html'"></div>
+<!-- Header end -->
 
-<!-- Navigation -->
+<!-- Navigation start -->
 <aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+<!-- Navigation end -->
 
-<!-- Main Wrapper -->
+<!-- Main Wrapper start -->
 <div id="wrapper">
   <div class="normalheader small-header">
     <div class="hpanel">
@@ -26,13 +28,12 @@
   </div>
   <div class="content" animate-panel effect="zoomIn">
     <form method="get" class="form-horizontal">
+      <!-- Image block start -->
       <div class="row">
         <div class="col-lg-3">
           <div class="hpanel hgreen">
-            <div class="panel-body">
-              <cl-image public-id="{{(ctrl.product.imgurl | extractClPublicId) || 'images/default.jpg'}}" class="img-responsive" format="jpg">
-                <cl-transformation height="250" width="250" crop="thumb" gravity="center" />
-              </cl-image>
+            <div class="panel-body" style="min-height: 300px;">
+              <img src="{{ctrl.product.imgurl || 'images/default.jpg'}}" class="img-responsive"/>
             </div>
             <div class="panel-footer clearfix">
               <h5 class="pull-left">Thumbnail</h5>
@@ -42,27 +43,21 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3" ng-repeat="img in ctrl.product.images">
+        <div class="col-lg-3" ng-repeat="img in ctrl.product.images  track by $index" ng-show="img.imgUrl">
           <div class="hpanel hgreen">
-            <div class="panel-body">
-              <cl-image public-id="{{(img.imgUrl | extractClPublicId)}}" class="img-responsive" format="jpg">
-                <cl-transformation height="250" width="250" crop="thumb" gravity="center" />
-              </cl-image>
+            <div class="panel-body" style="min-height: 300px;">
+              <img src="{{img.imgUrl || 'images/default.jpg'}}" class="img-responsive" format="jpg"/>
             </div>
-            <div class="panel-footer">
-              <div ngf-select ng-model="ctrl.thumbnail" class="btn btn-info btn-outline btn-sm" ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'">
-                <i class="fa fa-upload"></i>
-              </div>
-              <button class="btn btn-danger btn-outline btn-sm pull-right" type="button" ng-click="ctrl.removeThumbnail()"><i class="fa fa-trash-o"></i></button>
+            <div class="panel-footer clearfix">
+               <h5 class="pull-left">Gallery</h5>
+              <button class="btn btn-danger btn-outline btn-sm pull-right" type="button" ng-click="ctrl.removeGalleryImage($index)"><i class="fa fa-trash-o"></i></button>
             </div>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="hpanel hgreen">
-            <div class="panel-body">
-              <cl-image public-id="{{'default_oxzqjw'}}" class="img-responsive" format="jpg">
-                <cl-transformation height="250" width="250" crop="thumb" gravity="center" />
-              </cl-image>
+            <div class="panel-body" style="min-height: 300px;">
+              <img src="{{'images/default.jpg'}}" class="img-responsive" format="jpg"/>    
             </div>
             <div class="panel-footer clearfix">
               <h5 class="pull-left">Upload Gallery Image</h5>
@@ -73,6 +68,8 @@
           </div>
         </div>
       </div>
+      <!-- Image block end -->
+      <!-- Details block start -->
       <div class="row">
         <div class="col-lg-6">
           <div class="hpanel hgreen">
@@ -187,11 +184,13 @@
           </div>
         </div>
       </div>
+      <!-- Details block end -->
     </form>
   </div>
 </div>
+<!-- Main Wrapper end -->
 
-<!-- Modal -->
+<!-- Modals start -->
 <!--Add Category modal-->
 <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -230,7 +229,7 @@
 </div>
 <!--Add Category modal-->
 
-<!--Add vendor modal-->
+<!--Add vendor modal start-->
 <div class="modal fade" id="vendorModal" role="dialog">
   <div class="modal-dialog">
     <!-- <form class="form-horizontal" name="ctrl.vendor" ng-submit="ctrl.addVendorSubmit()"> -->
@@ -284,5 +283,5 @@
     <!-- </form> -->
   </div>
 </div>
-
-<!--Add vendor modal-->
+<!--Add vendor modal end-->
+<!-- Modals end -->

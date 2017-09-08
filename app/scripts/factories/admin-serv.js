@@ -4,7 +4,7 @@ angular
 
 function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
   return {
-    login: function(user) {
+    login: function (user) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin-login',
@@ -12,7 +12,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: user
       });
     },
-    logout: function(email) {
+    logout: function (email) {
       var user = {};
       user.email = email;
       return $http({
@@ -22,22 +22,22 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: user
       });
     },
-    getCategory: function() {
+    getCategory: function () {
       return $http.get(BASE_URL_CONSTANT + 'admin/get-category');
     },
-    getVendor: function() {
+    getVendor: function () {
       return $http.get(BASE_URL_CONSTANT + 'admin/get-vendor');
     },
-    getSize: function() {
+    getSize: function () {
       return $http.get(BASE_URL_CONSTANT + 'admin/get-size');
     },
-    getColor: function() {
+    getColor: function () {
       return $http.get(BASE_URL_CONSTANT + 'admin/get-color');
     },
-    getSizeGroup: function() {
+    getSizeGroup: function () {
       return $http.get(BASE_URL_CONSTANT + 'admin/get-sizegroup');
     },
-    addVendorSubmit: function(vendor) {
+    addVendorSubmit: function (vendor) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-vendor',
@@ -45,8 +45,8 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: vendor
       });
     },
-    addColor: function(name) {
-      bean ={};
+    addColor: function (name) {
+      bean = {};
       bean.name = name;
       return $http({
         method: 'POST',
@@ -55,8 +55,8 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    addSizeGroup: function(name) {
-      bean ={};
+    addSizeGroup: function (name) {
+      bean = {};
       bean.name = name;
       return $http({
         method: 'POST',
@@ -65,7 +65,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    addSize: function(sizeDto) {
+    addSize: function (sizeDto) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-size',
@@ -73,7 +73,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: sizeDto
       });
     },
-    getProducts: function(start, limit) {
+    getProducts: function (start, limit) {
       var bean = {};
       bean.start = start;
       bean.limit = limit;
@@ -84,7 +84,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    getProductsInventory: function(id) {
+    getProductsInventory: function (id) {
       var bean = {};
       bean.productId = id;
       return $http({
@@ -94,7 +94,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    updateProduct: function(product) {
+    updateProduct: function (product) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/update-product-details',
@@ -102,7 +102,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: product
       });
     },
-    updateProductInventory: function(productBean) {
+    updateProductInventory: function (productBean) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/update-product-inventory',
@@ -110,7 +110,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: productBean
       });
     },
-    uploadImage: function(productBean) {
+    uploadImage: function (productBean) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-product-image',
@@ -118,7 +118,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: productBean
       });
     },
-    getSpecifications: function(categoryId) {
+    getSpecifications: function (categoryId) {
       var bean = {};
       bean.categoryId = categoryId;
       return $http({
@@ -128,7 +128,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    getSpecificationsValue: function(categoryId) {
+    getSpecificationsValue: function (categoryId) {
       var bean = {};
       bean.categoryId = categoryId;
       return $http({
@@ -138,7 +138,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    saveProduct: function(productBean) {
+    saveProduct: function (productBean) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-product',
@@ -146,7 +146,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: productBean
       });
     },
-    saveCategory: function(categoryDto) {
+    saveCategory: function (categoryDto) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-category',
@@ -154,7 +154,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: categoryDto
       });
     },
-    addSpecification: function(specificationDto) {
+    addSpecification: function (specificationDto) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-specification',
@@ -162,7 +162,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: specificationDto
       });
     },
-    addSpecificationValue: function(specificationDto) {
+    addSpecificationValue: function (specificationDto) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/save-specification-value',
@@ -170,19 +170,34 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: specificationDto
       });
     },
-    uploadToCloudinary: function(file) {
+    uploadToCloudinary: function (file) {
       var q = $q.defer();
       cloudinary.upload(file, { upload_preset: 'gpucdhrn' })
-        .then(function(resp) {
+        .then(function (resp) {
           q.resolve(resp.data);
-        }, function(resp) {
+        }, function (resp) {
           console.log('Error');
           console.log(resp);
           q.reject(resp);
         });
       return q.promise;
     },
-    scrapListURL: function(url) {
+    uploadToGCS: function (file, productId) {
+      var bean = new FormData();
+      bean.append("productId", productId);
+      bean.append('file', file[0]);
+      return $http({
+        url: BASE_URL_CONSTANT + 'admin/upload-product-image',
+        method: 'POST',
+        data: bean,
+        //assign content-type as undefined, the browser
+        //will assign the correct boundary for us
+        headers: { 'Content-Type': undefined },
+        //prevents serializing bean.  don't do it.
+        transformRequest: angular.identity
+      });
+    },
+    scrapListURL: function (url) {
       var bean = {};
       bean.status = url;
       return $http({
@@ -192,7 +207,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    loadTempProductLinks: function() {
+    loadTempProductLinks: function () {
       var bean = {};
       bean.status = 'url';
       return $http({
@@ -202,7 +217,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    scrapProduct: function(products) {
+    scrapProduct: function (products) {
       var bean = {};
       bean.statusBeans = products;
       return $http({
@@ -212,7 +227,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    loadCrawledProducts: function(start, limit) {
+    loadCrawledProducts: function (start, limit) {
       var bean = {};
       bean.start = start;
       bean.limit = limit;
@@ -222,7 +237,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         headers: { 'Content-Type': 'application/json' },
         data: bean
       });
-    },getTempProductsInventory: function(id) {
+    }, getTempProductsInventory: function (id) {
       var bean = {};
       bean.productId = id;
       return $http({
@@ -232,7 +247,7 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    updateTempProduct: function(product) {
+    updateTempProduct: function (product) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/update-temp-product-details',
@@ -240,14 +255,14 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: product
       });
     },
-    updateTempProductInventory: function(productBean) {
+    updateTempProductInventory: function (productBean) {
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/update-temp-product-inventory',
         headers: { 'Content-Type': 'application/json' },
         data: productBean
       });
-    },commitTempProduct: function(statusBeans) {
+    }, commitTempProduct: function (statusBeans) {
       var bean = {};
       bean.statusBeans = statusBeans;
       return $http({
