@@ -1,0 +1,100 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="normalheader small-header">
+        <div class="hpanel">
+            <div class="panel-body">
+                <div id="hbreadcrumb" class="pull-right">
+                    <ol class="hbreadcrumb breadcrumb">
+                        <!--<li><a sref="products">Products</a></li>
+            <li>
+              <span>App views</span>
+            </li>-->
+                        <li class="active">
+                            <span>Orders</span>
+                        </li>
+                    </ol>
+                </div>
+                <h2 class="font-light m-b-xs">
+                    Orders
+                </h2>
+                <small>Order list</small>
+            </div>
+        </div>
+    </div>
+    <div class="content" animate-panel effect="zoomIn">
+        <div class="row projects">
+            <div class="col-lg-12" ng-repeat="order in ctrl.order">
+                <div class="hpanel hgreen">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <h4 class="text-capitalize">
+                                    <a sref="">#{{order.orderId}}</a>
+                                </h4>
+                                <p>
+                                    <span class="label label-info">{{order.orderStatus}}</span>
+                                    <span class="label label-success">{{order.quantity}}</span>
+                                    <span class="label label-default">
+                                        <i class="fa fa-inr"></i> {{order.price}}</span>
+                                </p>
+                                <p>
+                                    <span>{{order.userName}}</span>, 
+                                    <span>{{order.email}}</span>, 
+                                    <span>{{order.address.phone}}</span>, 
+                                    <span>{{order.address.streetOne}}</span>, 
+                                    <span>{{order.address.streetTwo}}</span>, 
+                                    <span>{{order.address.city}}</span>, 
+                                    <span>{{order.address.zipCode}}</span>
+                                </p>
+
+                                <a href="{{order.externalLink}}" class="btn btn-info" target="_blank">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+                                <a href="{{order.externalLink}}" class="btn btn-default" target="_blank" style="width: calc(100% - 130px); text-overflow: ellipsis; overflow: hidden;">{{order.externalLink}}</a>
+
+                                <button class="btn btn-info" type="button" ng-if="order.orderStatus=='approved'" ng-click="ctrl.changeOrderStatus('shipped', order.id)">
+                                    <i class="fa fa-pencil-square-o"></i> Shipped</button>
+                                <button class="btn btn-info" type="button" ng-if="order.orderStatus=='shipped'" ng-click="ctrl.changeOrderStatus('delivered', order.id)">
+                                    <i class="fa fa-clone"></i> Delivered</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="table-responsive">
+                                    <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr ng-repeat='(key, value) in order.properties'>
+                                                <th>{{key}}</th>
+                                                <td>
+                                                    <div ng-bind-html="ctrl.renderHtml(value)"></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 project-info">
+                                <img class="img-responsive" src="{{order.imgurl}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row projects">
+            <div class="col-xs-6">
+                <button class="btn btn-info" type="button" ng-click="ctrl.goToTop()">Go to top</button>
+            </div>
+            <div class="col-xs-6">
+                <div class="pull-right">
+                    <button class="btn btn-info" type="button" ng-click="ctrl.getPreviousProduct()" ng-hide="ctrl.isPrevHide">Privious</button>
+                    <button class="btn btn-info" type="button" ng-click="ctrl.getMoreProduct()" ng-hide="ctrl.isNextHide">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

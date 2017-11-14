@@ -1,8 +1,8 @@
 angular
   .module('homer')
-  // .constant('BASE_URL_CONSTANT', 'http://192.168.0.95:8084/')  //LOCAL
-  .constant('BASE_URL_CONSTANT', 'http://duqhan-admin-java.aq3cm3hjga.us-east-1.elasticbeanstalk.com/')  //PRODUCTION
-  .constant('ITEM_PER_PAGE', 50)
+  .constant('BASE_URL_CONSTANT', 'http://crawler-4.aq3cm3hjga.us-east-1.elasticbeanstalk.com/')  //LOCAL
+  // .constant('BASE_URL_CONSTANT', 'http://duqhan-admin-java.aq3cm3hjga.us-east-1.elasticbeanstalk.com/')  //PRODUCTION
+  .constant('ITEM_PER_PAGE', 20)
   .constant('AUTH_TOKEN', null)
   .constant('SUPPORTING_DATE_FORMATS_CONSTANT', [
     'dd-MMMM-yyyy',

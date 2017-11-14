@@ -271,6 +271,28 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         headers: { 'Content-Type': 'application/json' },
         data: bean
       });
+    },
+    getOrders: function (start, limit) {
+      var bean = {};
+      bean.start = start;
+      bean.limit = limit;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/get-orderlist',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
+    },
+    changeOrderStatus: function (status, id) {
+      var bean = {};
+      bean.status = status;
+      bean.id = id;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/changeOrderStatus',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
     }
 
   };

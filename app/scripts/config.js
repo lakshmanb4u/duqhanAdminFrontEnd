@@ -117,6 +117,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $http
         pageTitle: 'Crawled Products',
         pageDesc: 'List of all the product crawled'
       }
+    })
+    .state('orders', {
+      url: "/orders",
+      templateUrl: "views/orders.html",
+      controller: 'OrdersCtrl as ctrl',
+      data: {
+        pageTitle: 'Orders'
+      }
     });
 };
 

@@ -17,7 +17,7 @@
         .success(function(data) {
           console.log(data);
           if (data.aouthToken) {
-            $state.go('products');
+            $state.go('orders');
           } else {
             ctrl.loginFailed = true;
             $timeout(function() {

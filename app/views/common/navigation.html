@@ -2,22 +2,27 @@
   <div class="profile-picture">
     <div class="stats-label text-color">
       <span class="font-extra-bold font-uppercase">
-          <img src="images/logo.png" style="width: 100%;" />
+        <img src="images/logo.png" style="width: 100%;" />
       </span>
     </div>
   </div>
 
   <ul side-navigation class="nav metismenu" id="side-menu">
-    <li ng-class="{active: $state.includes('products')} || $state.includes('product') || $state.includes('newProduct')">
+    <!-- <li ng-class="{active: $state.includes('products')} || $state.includes('product') || $state.includes('newProduct')">
       <a ui-sref="products"> <span class="nav-label">Products</span></a>
+    </li> -->
+    <li ng-class="{active: $state.includes('orders')}">
+      <a ui-sref="orders">
+        <span class="nav-label">Orders</span>
+      </a>
     </li>
-    <li ng-class="{active: $state.includes('scrapper')}">
+    <!-- <li ng-class="{active: $state.includes('scrapper')}">
       <a href="#"><span class="nav-label">Crawler</span><span class="fa arrow"></span> </a>
       <ul class="nav nav-second-level" ng-class="{in: $state.includes('scrapper')}">
         <li ui-sref-active="active"><a ui-sref="scrapper.newlink">New Link</a></li>
         <li ui-sref-active="active"><a ui-sref="scrapper.linklist">Crawled Links</a></li>
         <li ui-sref-active="active"><a ui-sref="scrapper.productlist">Crawled Products</a></li>
       </ul>
-    </li>
+    </li> -->
   </ul>
 </div>
