@@ -1,6 +1,6 @@
 angular
   .module('homer')
-  .constant('BASE_URL_CONSTANT', 'http://crawler-1.aq3cm3hjga.us-east-1.elasticbeanstalk.com/')
+  .constant('BASE_URL_CONSTANT', 'http://34.238.78.39:8080/')
   .constant('ITEM_PER_PAGE', 20)
   .constant('AUTH_TOKEN', null)
   .constant('SUPPORTING_DATE_FORMATS_CONSTANT', [
