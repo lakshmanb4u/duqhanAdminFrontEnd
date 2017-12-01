@@ -32,6 +32,21 @@
                 console.log('Unable to load subject data');
             });
 
+        /*Get OrderWorkFlow Data*/    
+        AdminServ.orderWorkFlow()
+           .success(function (data) {
+                ctrl.orderWorkFlow = data.orderWorkflowList;
+           })
+           .error(function (error) {
+                console.log("error",error);
+           })
+        /*End*/
+        /*Set order status*/
+        ctrl.changeOrderStatus1 = function () {
+
+        }
+        /*End*/
+
         ctrl.changeOrderStatus = function (orderStatus, orderId) {
             AdminServ.changeOrderStatus(orderStatus, orderId)
                 .success(function (status) {

@@ -58,10 +58,10 @@
                                 </a>
                                 <a href="{{order.externalLink}}" class="btn btn-default" target="_blank" style="width: calc(100% - 130px); text-overflow: ellipsis; overflow: hidden;">{{order.externalLink}}</a>
 
-                                <button class="btn btn-info" type="button" ng-if="order.orderStatus=='approved'" ng-click="ctrl.changeOrderStatus('shipped', order.id)">
+                               <!--  <button class="btn btn-info" type="button" ng-if="order.orderStatus=='approved'" ng-click="ctrl.changeOrderStatus('shipped', order.id)">
                                     <i class="fa fa-pencil-square-o"></i> Shipped</button>
                                 <button class="btn btn-info" type="button" ng-if="order.orderStatus=='shipped'" ng-click="ctrl.changeOrderStatus('delivered', order.id)">
-                                    <i class="fa fa-clone"></i> Delivered</button>
+                                    <i class="fa fa-clone"></i> Delivered</button> -->
                             </div>
                             <div class="col-sm-3">
                                 <div class="table-responsive">
@@ -75,6 +75,15 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div>
+                                    <span>Order Status:</span>
+                                    <select placeholder="Order WorkFlow status..." ng-model="order.orderStatus" style="padding: 5px;background: transparent;border-radius: 4px;">
+                                        <optgroup ng-repeat="(key, value) in ctrl.orderWorkFlow" label="{{key}}">
+                                            <option ng-repeat="v in value" value="{{v.value}}">{{v.status}}</option>
+                                        </optgroup>
+                                    </select>
+                                    <button class="btn btn-info" type="button" ng-click="ctrl.changeOrderStatus(order.orderStatus,order.id)" style="margin-top: 10px;">Save</button>
                                 </div>
                             </div>
                             <div class="col-sm-2 project-info">

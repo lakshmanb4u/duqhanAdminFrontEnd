@@ -293,6 +293,9 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         headers: { 'Content-Type': 'application/json' },
         data: bean
       });
+    },
+    orderWorkFlow: function (){
+      return $http.get(BASE_URL_CONSTANT + 'admin/orderWorkflow'); 
     }
 
   };
