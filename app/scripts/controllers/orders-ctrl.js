@@ -124,7 +124,7 @@
         };
          // load filtered products
         ctrl.getProductByFilter = function () {
-            AdminServ.getOrders(ctrl.startIndex, ITEM_PER_PAGE, ctrl.orderStatusFilter)
+            AdminServ.getOrders(0, ITEM_PER_PAGE, ctrl.orderStatusFilter)
             .success(function (orderListDto) {
                 ctrl.order = orderListDto.orderDtos;
                 ctrl.startIndex = (parseInt(ctrl.startIndex) + parseInt(ITEM_PER_PAGE));
