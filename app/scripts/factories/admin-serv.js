@@ -272,10 +272,11 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
-    getOrders: function (start, limit) {
+    getOrders: function (start, limit, status) {
       var bean = {};
       bean.start = start;
       bean.limit = limit;
+      bean.orderStatus = status;
       return $http({
         method: 'POST',
         url: BASE_URL_CONSTANT + 'admin/get-orderlist',
@@ -296,7 +297,17 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
     },
     orderWorkFlow: function (){
       return $http.get(BASE_URL_CONSTANT + 'admin/orderWorkflow'); 
+    },
+    getCategories: function (start, limit) {
+      var bean = {};
+      bean.start = start;
+      bean.limit = limit;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/get-categories',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
     }
-
   };
 }

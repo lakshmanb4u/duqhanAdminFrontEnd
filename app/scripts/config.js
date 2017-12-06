@@ -125,8 +125,17 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $http
       data: {
         pageTitle: 'Orders'
       }
+    })
+    .state('categories', {
+      url: "/categories",
+      templateUrl: "views/categories.html",
+      controller: 'CategoriesCtrl as ctrl',
+      data: {
+        pageTitle: 'Categories'
+      }
     });
 };
+
 
 angular
   .module('homer')

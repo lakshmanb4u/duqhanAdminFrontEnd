@@ -1,0 +1,72 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="normalheader small-header">
+        <div class="hpanel">
+            <div class="panel-body">
+                <div id="hbreadcrumb" class="pull-right">
+                    <ol class="hbreadcrumb breadcrumb">
+                       <li class="active">
+                            <span>Categories</span>
+                        </li>
+                    </ol>
+                </div>
+                <h2 class="font-light m-b-xs">
+                    Categories
+                </h2>
+                <small>Category list</small>
+            </div>
+        </div>
+    </div>
+    <div class="content" animate-panel effect="zoomIn">
+        <div class="row projects">
+            <div class="col-lg-12" ng-repeat="category in ctrl.category">
+                <div class="hpanel hgreen">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <h4 class="text-capitalize">
+                                    <a>{{category.name}}</a>
+                                </h4>
+                                <h4 class="text-capitalize">
+                                    Display-Text:-<a style="color: #62cb31;">{{category.displayText}}</a>
+                                </h4>
+                                <p>
+                                    <div>Parent-Path:-<span class="label label-info">{{category.parentPath}}</span></div>
+                                    <div style="margin-top: 5px;">Parent-Id:-<span class="label label-success">{{category.parentId}}</span>
+                                    </div>
+                                    <div style="margin-top: 5px;">Quantity:-<span class="label label-default">{{category.quantity}}</span></div>
+                                </p>
+                            </div> 
+                            <div class="col-sm-2 project-info">
+                                <img style="background: #ffb606;" class="img-responsive" src="{{category.imgUrl}}" alt="">
+                            </div>
+                            <div class="col-sm-2 project-info">
+                                <img style="background: #ffb606;" class="img-responsive" src="{{category.menuIcon}}" alt="">
+                                 <!-- <input type=”file” id=”file” name=”file” custom-on-change=”add”/>
+                                <img src={{dataimg}}/> -->
+                               <!--  <input type="file" ng-file-select="onFileSelect($files)" ngf-accept="image/*" > -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row projects">
+            <div class="col-xs-6">
+                <button class="btn btn-info" type="button" ng-click="ctrl.goToTop()">Go to top</button>
+            </div>
+            <div class="col-xs-6">
+                <div class="pull-right">
+                    <button class="btn btn-info" type="button" ng-click="ctrl.getPreviousProduct()" ng-hide="ctrl.isPrevHide">Privious</button>
+                    <button class="btn btn-info" type="button" ng-click="ctrl.getMoreProduct()" ng-hide="ctrl.isNextHide">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

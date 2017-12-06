@@ -13,14 +13,14 @@
         ctrl.isNextHide = false;
         ctrl.isPrevHide = true;
         ctrl.order = null;
-
+        ctrl.orderStatusFilter = "";
         ctrl.renderHtml = function (html_code) {
             return $sce.trustAsHtml(html_code);
         };
 
         // get products when load view product page
         $('.loader').show();
-        AdminServ.getOrders(ctrl.startIndex, ITEM_PER_PAGE)
+        AdminServ.getOrders(ctrl.startIndex, ITEM_PER_PAGE, ctrl.orderStatusFilter)
             .success(function (orderListDto) {
                 ctrl.order = orderListDto.orderDtos;
                 ctrl.startIndex = (parseInt(ctrl.startIndex) + parseInt(ITEM_PER_PAGE));
@@ -32,6 +32,7 @@
                 console.log('Unable to load subject data');
             });
 
+       
         /*Get OrderWorkFlow Data*/    
         AdminServ.orderWorkFlow()
            .success(function (data) {
@@ -69,7 +70,7 @@
         ctrl.getMoreProduct = function () {
             $('.loader').show();
             console.log('ctrl.startIndex' + ctrl.startIndex);
-            AdminServ.getOrders(parseInt(ctrl.startIndex), ITEM_PER_PAGE)
+            AdminServ.getOrders(parseInt(ctrl.startIndex), ITEM_PER_PAGE ,ctrl.orderStatusFilter)
                 .success(function (orderListDto) {
                     // console.log(orderListDto.orderDtos);
                     if (!orderListDto.orderDtos || orderListDto.orderDtos.length < 1) {
@@ -98,7 +99,7 @@
                 ctrl.isNextHide = false;
                 $('.loader').hide();
             } else {
-                AdminServ.getOrders((parseInt(ctrl.startIndex) - parseInt(ITEM_PER_PAGE)), ITEM_PER_PAGE)
+                AdminServ.getOrders((parseInt(ctrl.startIndex) - parseInt(ITEM_PER_PAGE)), ITEM_PER_PAGE, ctrl.orderStatusFilter)
                     .success(function (orderListDto) {
                         if (!orderListDto.orderDtos || orderListDto.orderDtos.length < ITEM_PER_PAGE) {
                             ctrl.isPrevHide = true;
@@ -120,6 +121,20 @@
                         console.log('Unable to load subject data');
                     });
             }
+        };
+         // load filtered products
+        ctrl.getProductByFilter = function () {
+            AdminServ.getOrders(ctrl.startIndex, ITEM_PER_PAGE, ctrl.orderStatusFilter)
+            .success(function (orderListDto) {
+                ctrl.order = orderListDto.orderDtos;
+                ctrl.startIndex = (parseInt(ctrl.startIndex) + parseInt(ITEM_PER_PAGE));
+                // console.log(ctrl.order);
+                $('.loader').hide();
+            })
+            .error(function (error) {
+                $('.loader').hide();
+                console.log('Unable to load subject data');
+            });
         };
     }
 })();
