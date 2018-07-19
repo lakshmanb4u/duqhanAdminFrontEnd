@@ -1,0 +1,95 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="normalheader small-header">
+        <div class="hpanel">
+            <div class="panel-body">
+                <div id="hbreadcrumb" class="pull-right">
+                    <ol class="hbreadcrumb breadcrumb">
+                        <li class="active">
+                            <span>DeepLink</span>
+                        </li>
+                    </ol>
+                </div>
+                <div style="float: left;">
+                    <h2 class="font-light m-b-xs">
+                        DeepLink
+                    </h2>
+                    <small>DeepLink list</small>
+                </div>
+                <div style="float: left;margin-left: 5%;">
+                    <input style="height: 30px;width: 250px;" type="text" placeholder="search category..." class="search">
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+    <div class="content" animate-panel effect="zoomIn">
+        <div class="row projects">
+        <table rules="all" border="1" style="width: 100%;background: #fff;">
+            
+            <tr>
+                <td style="padding: 6px;font-size: 15px;text-align: center;font-weight: 600;" class="col-md-6">Categories</td>
+                <td style="padding: 6px;font-size: 15px;text-align: center;font-weight: 600;" class="col-md-6">DeepLink</td>
+            </tr>
+            
+            <tr class="search_item" ng-repeat="category in ctrl.categories">
+               
+                <td style="padding: 6px;font-size: 15px;" class="searchee col-md-6">{{category.name}}
+                <button ng-click="ctrl.createLink(category)" class="btn btn-info" type="button" ng-click="ctrl.changeOrderStatus(order.orderStatus,order.id)" style="float: right;">create</button>
+                </td>
+               
+                <td style="padding: 6px;font-size: 15px;" class="col-md-6">
+                    <a href="{{ctrl.url[category.id]}}" class="btn btn-info" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                    <a href="{{ctrl.url[category.id]}}" class="btn btn-default" target="_blank" style="width: calc(100% - 60px); text-overflow: ellipsis; overflow: hidden;height: 30px">{{ctrl.url[category.id]}}</a>
+                </td>
+            
+            </tr>
+        
+        </table>
+        <!-- <div class="col-md-12 col-xs-12">
+            <div class="col-md-6 col-xs-6">
+                <span>Categories</span>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <span>DeepLink</span>
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12" ng-repeat="category in ctrl.categories">
+            <div class="col-md-6 col-xs-6">
+                <span>{{category.name}}</span>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <span>DeepLink</span>
+            </div>
+        </div> -->
+        <div class="row projects">
+            <div class="col-xs-6">
+                <button class="btn btn-info" type="button" ng-click="ctrl.goToTop()">Go to top</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function onsearch() {
+           var val = jQuery.trim(jQuery(this).val()).replace(/ +/g, ' ').toLowerCase();
+           jQuery('.search_item').show().filter(function() {
+               var text = jQuery('.searchee',this).text().replace(/\s+/g, ' ').toLowerCase();
+               return !~text.indexOf(val);
+           }).hide();
+        }
+
+        jQuery(function() {
+        jQuery(this).on('keyup', '.search', onsearch)
+        jQuery('body').trigger('reload');
+        });
+    </script>
+</div>    

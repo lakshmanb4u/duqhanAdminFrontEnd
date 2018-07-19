@@ -284,6 +284,25 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
+    getAllCategories: function (start, limit) {
+      var bean = {};
+      bean.start = start;
+      bean.limit = limit;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/get-all-categories',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
+    },
+    getDeepLink: function (param) {
+      return $http({
+        method: 'POST',
+        url: 'https://api.branch.io/v1/url',
+        headers: { 'Content-Type': 'application/json' },
+        data: param
+      });
+    },
     changeOrderStatus: function (status, id) {
       var bean = {};
       bean.status = status;

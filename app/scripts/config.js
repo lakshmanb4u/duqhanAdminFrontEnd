@@ -126,6 +126,14 @@ function configState($stateProvider, $urlRouterProvider, $compileProvider, $http
         pageTitle: 'Orders'
       }
     })
+    .state('deepLink', {
+      url: "/deepLink",
+      templateUrl: "views/deepLink.html",
+      controller: 'DeepLinkCtrl as ctrl',
+      data: {
+        pageTitle: 'DeepLink'
+      }
+    })
     .state('categories', {
       url: "/categories",
       templateUrl: "views/categories.html",
