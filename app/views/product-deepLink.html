@@ -1,0 +1,80 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/header.html'"></div>
+
+<!-- Navigation -->
+<aside id="menu" ng-include="'views/common/navigation.html'"></aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+<style type="text/css">
+.fixed-small-header .content {
+    padding-top: 40px;
+}
+.content {
+    padding: 41px 0px 0px 20px;
+    min-width: 320px;
+}
+</style>
+    <div class="normalheader small-header">
+        <div class="hpanel">
+            <div class="panel-body">
+                <div id="hbreadcrumb" class="pull-right">
+                    <ol class="hbreadcrumb breadcrumb">
+                        <li class="active">
+                            <span>Products</span>
+                        </li>
+                    </ol>
+                </div>
+                <div style="float: left;">
+                    <h2 class="font-light m-b-xs">
+                        Products
+                    </h2>
+                    <small>Product list</small>
+                </div>
+                <div style="float: left;margin-left: 5%;">
+                    <input ng-model="ctrl.searchText" style="height: 30px;width: 250px;" type="text" placeholder="search category...">
+                </div>
+                <div>
+                    <button style="margin-left: 35%;" class="btn btn-info" type="button" ng-click="ctrl.searchkeyWord(ctrl.searchText)">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+    <div class="content" animate-panel effect="zoomIn">
+        <div class="row projects">
+        <div class="content" animate-panel effect="zoomIn">
+        <div class="latest-section">
+          <div class="product-cart" ng-repeat="product in ctrl.products">
+            <a ng-mousedown="ctrl.createLink(product)">
+                <div class="product-img-div">
+                     <img src="{{product.imgurl}}" class="product-cart-img" style="cursor:pointer">
+                </div>
+            </a>
+              <p class="letest-p">{{product.name}}</p>
+              <p><span class="rupy">{{product.discountedPrice}}&nbsp;&nbsp;</span><span class="line-rupy">{{product.price}}</span></p>
+              <div>
+                <a href="{{ctrl.url[product.productId]}}" class="btn btn-info" target="_blank">
+                <i class="fa fa-external-link"></i>
+                </a>
+                <a href="{{ctrl.url[product.productId]}}" class="btn btn-default" target="_blank" style="width: calc(100% - 60px); text-overflow: ellipsis; overflow: hidden;height: 30px">{{ctrl.url[product.productId]}}</a>  
+              </div>
+          </div>
+        </div>
+        </div>
+        </div>
+        <div class="row projects" style="padding-bottom: : 50px;">
+            <div class="col-xs-6">
+                <button class="btn btn-info" type="button" ng-click="ctrl.goToTop()">Go to top</button>
+            </div>
+            <div class="col-xs-6">
+                <div class="pull-right" style="margin-right: 90px;">
+                    <button class="btn btn-info" type="button" ng-click="ctrl.getPreviousProduct()" ng-hide="ctrl.isPrevHide">Privious</button>
+                    <button class="btn btn-info" type="button" ng-click="ctrl.getMoreProduct()" ng-hide="ctrl.isNextHide">Next</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>    

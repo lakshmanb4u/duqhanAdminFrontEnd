@@ -295,6 +295,18 @@ function AdminServ($http, $q, cloudinary, BASE_URL_CONSTANT) {
         data: bean
       });
     },
+    searchProduct: function (start, limit,searchText) {
+      var bean = {};
+      bean.start = start;
+      bean.limit = limit;
+      bean.name = searchText;
+      return $http({
+        method: 'POST',
+        url: BASE_URL_CONSTANT + 'admin/search-product',
+        headers: { 'Content-Type': 'application/json' },
+        data: bean
+      });
+    },
     getDeepLink: function (param) {
       return $http({
         method: 'POST',
