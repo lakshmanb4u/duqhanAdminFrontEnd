@@ -1,10 +1,10 @@
  .product-cart {
-    width: 250px;
+    width: 240px;
     height: 400px;
     position: relative;
     vertical-align: top;
     display: inline-block;
-    margin: 0 40px 20px 0;
+    margin: 0 25px 20px 0;
     text-align: center;
     overflow: hidden;
     border: 1px solid #e4e5e7;
