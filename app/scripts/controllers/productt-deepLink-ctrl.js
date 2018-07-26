@@ -15,6 +15,42 @@
         ctrl.isPrevHide = true;
 
         $('.loader').show();
+        ctrl.searchUrl = "";
+        ctrl.createSearchLink = function(searchkeyWord,imgUrl) {
+            var param = {};
+            param = {
+                  branch_key: "key_live_jasN48mYmaWI5drVenGNykonrAe13jw7",
+                  channel: "facebook",
+                  feature: "onboarding",
+                  campaign: "testing campaign",
+                  stage: "new user",
+                  data: {
+                    $canonical_identifier: searchkeyWord,
+                    $og_title: searchkeyWord,
+                    $og_description: searchkeyWord + ' of good quality and very cheaper rate',
+                    $og_image_url: imgUrl,
+                    $desktop_url: "https://www.duqhan.com/#/products-search/"+searchkeyWord,
+                    $android_url:"file:///android_asset/www/index.html#/store/products-search/"+searchkeyWord,
+                    $ios_url:"#/store/products-search/"+searchkeyWord,
+                    custom_boolean: true,
+                    custom_integer: 1243,
+                    custom_string: "everything",
+                    custom_array: [1,2,3,4,5,6],
+                    custom_object: { "random": "dictionary" }
+                  }
+            }
+            
+            AdminServ.getDeepLink(param)
+                .success(function (responce) {
+                    ctrl.searchUrl = responce.url;
+                    console.log(responce.url);
+                    $('.loader').hide();
+                })
+                .error(function (error) {
+                    $('.loader').hide();
+                    console.log(error);
+            });  
+        }   
         ctrl.searchProduct = function (searchText) {
            ctrl.searchText = searchText;
            $('.loader').show(); 
@@ -22,8 +58,9 @@
             .success(function (responce) {
                 ctrl.products = responce.products;
                 console.log(ctrl.products);
+                console.log(ctrl.products[0].imgurl);
                 ctrl.startIndex = (parseInt(ctrl.startIndex) + parseInt(ITEM_PER_PAGE));
-                console.log(ctrl.categories);
+                ctrl.createSearchLink(ctrl.searchText,ctrl.products[0].imgurl);
                 $('.loader').hide();
             })
             .error(function (error) {
@@ -131,7 +168,8 @@
                     $('.loader').hide();
                     console.log(error);
             });  
-        }  
+        } 
+
         // Go To Top Of Page
         ctrl.goToTop = function () {
             $("html, body").animate({ scrollTop: 0 }, 600);

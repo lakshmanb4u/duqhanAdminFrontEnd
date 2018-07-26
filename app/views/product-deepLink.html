@@ -34,8 +34,14 @@
                 <div style="float: left;margin-left: 5%;">
                     <input ng-model="ctrl.searchText" style="height: 30px;width: 250px;" type="text" placeholder="search category...">
                 </div>
-                <div>
-                    <button style="margin-left: 3%;" class="btn btn-info" type="button" ng-click="ctrl.searchkeyWord(ctrl.searchText)">Search</button>
+                <div  style="float: left; margin-left: 3%;" >
+                    <button class="btn btn-info" type="button" ng-click="ctrl.searchkeyWord(ctrl.searchText)">Search</button>
+                </div>
+                <div style="float: left;margin-left: 20%;">
+                    <a href="{{ctrl.searchUrl}}" class="btn btn-info" target="_blank">
+                    <i class="fa fa-external-link"></i>
+                    </a>
+                    <a href="{{ctrl.searchUrl}}" class="btn btn-default" target="_blank" style="width: calc(100% - 60px); text-overflow: ellipsis; overflow: hidden;height: 30px">{{ctrl.searchUrl}}</a>  
                 </div>
             </div>
         </div>

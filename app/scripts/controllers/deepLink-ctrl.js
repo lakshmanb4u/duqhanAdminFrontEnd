@@ -34,7 +34,7 @@
                   data: {
                     $canonical_identifier: category.displayText + category.id,
                     $og_title: category.displayText,
-                    $og_description: category.name + 'of good quality and very cheaper rate' ,
+                    $og_description: category.name + ' of good quality and very cheaper rate' ,
                     $og_image_url: category.imgUrl,
                     $desktop_url: "https://duqhan.com/#/products-by-category?categoryId="+category.id,
                     $android_url: "file:///android_asset/www/index.html#/store/products-by-category/"+category.id,
